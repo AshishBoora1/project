@@ -27,7 +27,7 @@ function SignUp() {
   }
   return (
     <div className="bg_account  md:py-10 min-h-screen bg-no-repeat bg-cover flex justify-center items-center">
-      <div className=" bg-white md:rounded-[20px] md:border-[2px] border-[#D4D4D4]  px-[44px] md:px-[70px] py-10 w-full md:w-[500px] gap-5 min-h-screen md:min-h-full md:h-[641px] flex flex-col justify-evenly md:justify-between items-center">
+      <div className=" bg-white md:rounded-[20px] md:border-[2px] border-[#D4D4D4]  px-[34px] md:px-[70px] py-10 w-full md:w-[500px] gap-5 min-h-screen md:min-h-full md:h-[641px] flex flex-col justify-evenly md:justify-between items-center">
         <div className=" md:hidden">
           <Logo />
         </div>
@@ -91,7 +91,7 @@ function SignUp() {
               className=" bg-[#4285F4] rounded-[7px] p-1 flex items-center w-full gap-10"
             >
               <img src={googleicon} alt="googleicon" />
-              <span className=" text-white font-normal text-lg">
+              <span className=" text-white font-normal text-lg text-nowrap">
                 Continue with Google
               </span>
             </button>

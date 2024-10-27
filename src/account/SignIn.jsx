@@ -25,7 +25,7 @@ function SignIn() {
   }
   return (
     <div className="bg_account md:py-10 min-h-screen bg-no-repeat bg-cover flex justify-center items-center">
-      <div className=" bg-white md:rounded-[20px] md:border-[2px] border-[#D4D4D4]  px-[44px] md:px-[70px] pb-[35px] pt-10 w-full md:w-[500px] gap-5 min-h-screen md:min-h-full md:h-[621px] flex flex-col justify-evenly md:justify-between items-center">
+      <div className=" bg-white md:rounded-[20px] md:border-[2px] border-[#D4D4D4]  px-[34px] md:px-[70px] pb-[35px] pt-10 w-full md:w-[500px] gap-5 min-h-screen md:min-h-full md:h-[621px] flex flex-col justify-evenly md:justify-between items-center">
         <div className=" md:hidden">
           <Logo />
         </div>
