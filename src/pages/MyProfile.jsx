@@ -16,7 +16,7 @@ export default function MyProfile() {
   return (
     <div className=" h-screen flex flex-col justify-between gap-10">
       <div>
-        <Navbar />
+        <Navbar show={true} />
         <div className="container xl:max-w-[1228px] mx-auto px-3">
           <div className="flex items-center justify-around mt-5  pt-[50px] lg:pt-[100px]">
             <NavLink
@@ -33,7 +33,7 @@ export default function MyProfile() {
             </NavLink>
           </div>
 
-          <form className="mt-[75px]" onSubmit={onhadelsubmit}>
+          <form className="my-[75px]" onSubmit={onhadelsubmit}>
             <label>Name</label>
             <input
               value={name}

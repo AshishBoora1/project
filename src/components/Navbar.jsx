@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { CrossIcon, Logo, ThreeLineIcon } from "../components/icons/Icons";
 import { NavLink } from "react-router-dom";
 
-function Navbar() {
+function Navbar({show}) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav>
-      <div className="container xl:max-w-[1328px] mx-auto px-3 pt-5 pb-4 border-b border-[#29272726]">
+    <nav className={show && " border-0 md:border-b border-[#29272726]"}>
+      <div
+        className={`container xl:max-w-[1328px] mx-auto px-3 pt-5 pb-4 ${
+          !show && " border-0 md:border-b border-[#29272726]"
+        }`}
+      >
         <div className="flex items-center justify-between">
           <Logo />
 

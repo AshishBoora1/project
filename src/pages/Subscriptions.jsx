@@ -8,7 +8,7 @@ export default function Subscriptions() {
   return (
     <div className="flex h-screen flex-col justify-between gap-10">
       <div>
-        <Navbar />
+        <Navbar show={true} />
         <div className="container xl:max-w-[1228px] mx-auto px-3">
           <div className="flex items-center justify-around mt-5  pt-[50px] lg:pt-[100px]">
             <NavLink
@@ -24,7 +24,7 @@ export default function Subscriptions() {
               My Profile
             </NavLink>
           </div>
-          <div className="flex flex-wrap items-center justify-between mx-[-12px] mt-[30px] lg:mt-[100px] gap-5 lg:flex-nowrap">
+          <div className="flex flex-wrap items-center justify-between mx-[-12px] my-[30px] lg:my-[100px] gap-5 lg:flex-nowrap">
             {CardData.map((item, index) => {
               return (
                 <div
