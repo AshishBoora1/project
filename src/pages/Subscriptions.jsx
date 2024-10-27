@@ -24,12 +24,12 @@ export default function Subscriptions() {
               My Profile
             </NavLink>
           </div>
-          <div className="flex flex-wrap items-center justify-between mx-[-12px] mt-[30px] lg:mt-[100px]">
+          <div className="flex flex-wrap items-center justify-between mx-[-12px] mt-[30px] lg:mt-[100px] gap-5 lg:flex-nowrap">
             {CardData.map((item, index) => {
               return (
                 <div
                   key={index}
-                  className="w-full md:w-6/12 lg:w-4/12 px-3 mx-auto h-full"
+                  className="w-full md:w-[48%] lg:w-4/12 px-3 mx-auto h-full"
                 >
                   <div className="py-[25px] lg:py-[30px] px-[10px] lg:px-[20px]  border border-[#B999764D] shadow-lg text-center rounded-[15px] h-[252px]">
                     <img className="mx-auto" src={item.img} />
