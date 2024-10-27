@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import SignUp from "./account/Signup";
+import SignUp from "./account/SignUp";
 import SignIn from "./account/SignIn";
 import Home from "./pages/Home";
 import MyProfile from "./pages/MyProfile";
