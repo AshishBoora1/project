@@ -50,8 +50,7 @@ export function HidePassIcon() {
   );
 }
 
-
-export  function Logo() {
+export function Logo() {
   return (
     <svg
       width="214"
@@ -261,8 +260,6 @@ export  function Logo() {
   );
 }
 
-
-
 export function ArrowIcon() {
   return (
     <svg
@@ -336,8 +333,6 @@ export function ArrowIcon() {
   );
 }
 
-
-
 export function LineIcon() {
   return (
     <svg
@@ -372,21 +367,18 @@ export function EmailIcon() {
   );
 }
 
-
-
-
-export function CrossIcon() {
+export function CrossIcon({ clr }) {
   return (
     <svg
-      width="27"
-      height="27"
+      width="20"
+      height="20"
       viewBox="0 0 27 27"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         d="M2.7 27L0 24.3L10.8 13.5L0 2.7L2.7 0L13.5 10.8L24.3 0L27 2.7L16.2 13.5L27 24.3L24.3 27L13.5 16.2L2.7 27Z"
-        fill="#D7191C"
+        fill={clr ? clr : "#D7191C"}
       />
     </svg>
   );

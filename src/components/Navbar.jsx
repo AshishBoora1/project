@@ -5,7 +5,7 @@ import { useThem } from "../Context/Context";
 
 function Navbar({ show }) {
   const [isOpen, setIsOpen] = useState(false);
-  const { setShowSignPop } = useThem();
+  const { setShowSignPop, scrollToNextSection } = useThem();
 
   return (
     <nav className={show && " border-0 md:border-b border-[#29272726]"}>
@@ -33,11 +33,10 @@ function Navbar({ show }) {
                 <CrossIcon />
               </button>
             </div>
-            <div className=" h-[1px] w-full bg-[#00000040] lg:hidden"></div>
             <NavLink
               className="text-xl lg:text-base xl:text-xl font-normal text-[#292727] hover:text-[#1A1615]"
               to="/"
-              onClick={() => setIsOpen(false)}
+              onClick={() => (setIsOpen(false), scrollToNextSection(1))}
             >
               Tech History
             </NavLink>
@@ -45,7 +44,7 @@ function Navbar({ show }) {
             <NavLink
               className="text-xl lg:text-base xl:text-xl font-normal text-[#292727] hover:text-[#1A1615]"
               to="/"
-              onClick={() => setIsOpen(false)}
+              onClick={() => (setIsOpen(false), scrollToNextSection(2))}
             >
               ML Summary
             </NavLink>
@@ -53,7 +52,7 @@ function Navbar({ show }) {
             <NavLink
               className="text-xl lg:text-base xl:text-xl font-normal text-[#292727] hover:text-[#1A1615]"
               to="/"
-              onClick={() => setIsOpen(false)}
+              onClick={() => (setIsOpen(false), scrollToNextSection(3))}
             >
               Space Block Puzzle
             </NavLink>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Slider from "react-slick";
@@ -12,6 +12,7 @@ import rightimg from "../assets/images/png/rightimg.png";
 import { ArrowIcon, EmailIcon, LineIcon } from "../components/icons/Icons";
 import Navbar from "../components/Navbar";
 import { NavLink } from "react-router-dom";
+import { useThem } from "../Context/Context";
 function PrevArrow(props) {
   const { onClick } = props;
   return (
@@ -41,6 +42,7 @@ function NextArrow(props) {
 }
 
 function Home() {
+  const { sectionRefs } = useThem();
   const settings = {
     dots: false,
     infinite: true,
@@ -59,9 +61,11 @@ function Home() {
     });
   }, []);
 
+  //  ref={(el) => (sectionRefs.current[3] = el)}
+
   return (
     <div>
-      <section className="bg-[#F3F8FA]  relative ">
+      <section className="bg-[#F3F8FA]  relative overflow-hidden">
         <img className=" absolute top-0 left-0" src={imgleft} alt="imgleft" />
         <img
           className=" absolute top-0 right-0"
@@ -72,13 +76,13 @@ function Home() {
           <div>
             <Navbar />
           </div>
-          <div
-            className="mt-[90px] pt_30"
-            data-aos="fade-right"
-            data-aos-offset="300"
-            data-aos-easing="ease-in-sine"
-          >
-            <div className="text-center">
+          <div className="mt-[90px] pt_30">
+            <div
+              className="text-center"
+              data-aos="fade-up"
+              data-aos-offset="300"
+              data-aos-easing="ease-in-sine"
+            >
               <h1 className="ff_promt text-[30px] lg:text-[60px]  xl:text-[90px] font-normal text-[#292727]">
                 Learn Entertain Grow
               </h1>
@@ -96,7 +100,11 @@ function Home() {
               </div>
             </div>
 
-            <div className=" mt-16  xl:mt-[45px] relative">
+            <div
+              className=" mt-16  xl:mt-[45px] relative"
+              data-aos="fade-left"
+              data-aos-easing="ease-in-sine"
+            >
               {/* <Slider {...settings} className="flex items-center">
                 {[1, 2, 3, 4, 5].map((i, index) => (
                   <div key={index}>
@@ -122,11 +130,17 @@ function Home() {
         </div>
       </section>
       {/* /////////     Tech History      //////// */}
-      <section>
+      <section className=" overflow-hidden">
         <div className="container  xl:max-w-[1328px] mx-auto px-3">
-          <div className=" py-[60px] md:py-[100px]  xl:py-[150px]">
+          <div
+            className=" py-[60px] md:py-[100px]  xl:py-[150px]"
+            ref={(el) => (sectionRefs.current[1] = el)}
+          >
             <div className=" flex items-center justify-between gap-10 sm:gap-20 lg:gap-10 flex-wrap lg:flex-nowrap">
-              <div className=" w-full lg:w-6/12 xl:w-6/12 text-center sm:text-start">
+              <div
+                className=" w-full lg:w-6/12 xl:w-6/12 text-center sm:text-start"
+                data-aos="zoom-in-up"
+              >
                 <div className=" xl:w-[91%]">
                   <h2 className=" font-semibold text-[30px] sm:text-[35px] xl:text-[45px] ff_promt text-[#B99976]">
                     Tech History
@@ -154,7 +168,10 @@ function Home() {
                   </p>
                 </div>
               </div>
-              <div className=" w-full lg:w-6/12 xl:w-5/12">
+              <div
+                className=" w-full lg:w-6/12 xl:w-5/12"
+                data-aos="zoom-in-up"
+              >
                 <div>
                   <img width={"100%"} src={firstfroupimg} alt="firstfroupimg" />
                 </div>
@@ -164,11 +181,17 @@ function Home() {
         </div>
       </section>
       {/* ///////    ML Summary      ////// */}
-      <section>
+      <section className=" overflow-hidden">
         <div className="bg-[#B99976]">
-          <div className=" py-[60px] md:py-[80px] container  xl:max-w-[1328px] mx-auto px-3 ">
+          <div
+            className=" py-[60px] md:py-[80px] container  xl:max-w-[1328px] mx-auto px-3 "
+            ref={(el) => (sectionRefs.current[2] = el)}
+          >
             <div className=" flex items-center justify-between gap-10 sm:gap-20 lg:gap-10 flex-wrap flex-col-reverse lg:flex-row lg:flex-nowrap">
-              <div className=" w-full lg:w-6/12 xl:w-5/12">
+              <div
+                className=" w-full lg:w-6/12 xl:w-5/12"
+                data-aos="zoom-in-left"
+              >
                 <div>
                   <img
                     width={"100%"}
@@ -177,7 +200,10 @@ function Home() {
                   />
                 </div>
               </div>
-              <div className=" w-full lg:w-6/12 xl:w-6/12 text-center sm:text-start">
+              <div
+                className=" w-full lg:w-6/12 xl:w-6/12 text-center sm:text-start"
+                data-aos="zoom-in-right"
+              >
                 <div className="xl:w-[91%]">
                   <h2 className=" font-semibold text-[30px] sm:text-[35px] xl:text-[45px] ff_promt text-white">
                     ML Summary
@@ -209,11 +235,15 @@ function Home() {
         </div>
       </section>
       {/* //////    Space Puzzle   ///////  */}
-      <section>
+      <section className=" overflow-hidden">
         <div className="container  xl:max-w-[1328px] mx-auto px-3">
           <div className=" py-[60px] md:py-[100px]  xl:py-[150px]">
             <div className=" flex items-center justify-between gap-10 sm:gap-20 lg:gap-10 flex-wrap lg:flex-nowrap">
-              <div className=" w-full lg:w-6/12 xl:w-6/12 text-center sm:text-start">
+              <div
+                className=" w-full lg:w-6/12 xl:w-6/12 text-center sm:text-start"
+                data-aos="zoom-in-right"
+                ref={(el) => (sectionRefs.current[3] = el)}
+              >
                 <div className=" xl:w-[91%]">
                   <h2 className=" font-semibold text-[30px] sm:text-[35px] xl:text-[45px] ff_promt text-[#B99976]">
                     Space Puzzle
@@ -267,7 +297,10 @@ function Home() {
                   </div>
                 </div>
               </div>
-              <div className=" w-full lg:w-6/12 xl:w-5/12">
+              <div
+                className=" w-full lg:w-6/12 xl:w-5/12"
+                data-aos="zoom-in-left"
+              >
                 <div>
                   <img width={"100%"} src={thirdfroupimg} alt="thirdfroupimg" />
                 </div>
@@ -276,13 +309,14 @@ function Home() {
           </div>
         </div>
       </section>
+
       {/* ////   client    //// */}
 
-      <section>
+      <section className=" overflow-hidden">
         <div className="container  xl:max-w-[1328px] mx-auto px-3 pt-[5px] md:pt-0">
           <div className=" pb-[60px] md:pb-[100px]  xl:pb-[150px]">
             <div className=" flex items-end justify-between gap-10 flex-wrap flex-col-reverse lg:flex-row lg:flex-nowrap">
-              <div className=" w-full lg:w-5/12">
+              <div className=" w-full lg:w-5/12" data-aos="zoom-out-right">
                 <img
                   className=" rounded-full lg:rounded-none"
                   width={"100%"}
@@ -290,7 +324,10 @@ function Home() {
                   alt="clientiimg"
                 />
               </div>
-              <div className=" w-full lg:w-6/12 text-center md:text-start">
+              <div
+                className=" w-full lg:w-6/12 text-center md:text-start"
+                data-aos="zoom-out-left"
+              >
                 <div>
                   <div className=" flex justify-center md:justify-start">
                     <LineIcon />

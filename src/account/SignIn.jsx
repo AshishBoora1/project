@@ -41,7 +41,7 @@ function SignIn() {
               className=" absolute right-5 top-5"
               onClick={() => setShowSignPop(false)}
             >
-              <CrossIcon />
+              <CrossIcon clr={"#ccc"} />
             </button>
             <div className=" md:hidden">
               <Logo />
