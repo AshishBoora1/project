@@ -35,7 +35,7 @@ function Navbar({ show }) {
             </div>
             <NavLink
               className="text-xl lg:text-base xl:text-xl font-normal text-[#292727] hover:text-[#1A1615]"
-              to="/"
+              to=""
               onClick={() => (setIsOpen(false), scrollToNextSection(1))}
             >
               Tech History
@@ -43,7 +43,7 @@ function Navbar({ show }) {
             <div className=" h-[1px] w-full bg-[#00000040] lg:hidden"></div>
             <NavLink
               className="text-xl lg:text-base xl:text-xl font-normal text-[#292727] hover:text-[#1A1615]"
-              to="/"
+              to=""
               onClick={() => (setIsOpen(false), scrollToNextSection(2))}
             >
               ML Summary
@@ -51,7 +51,7 @@ function Navbar({ show }) {
             <div className=" h-[1px] w-full bg-[#00000040] lg:hidden"></div>
             <NavLink
               className="text-xl lg:text-base xl:text-xl font-normal text-[#292727] hover:text-[#1A1615]"
-              to="/"
+              to=""
               onClick={() => (setIsOpen(false), scrollToNextSection(3))}
             >
               Space Block Puzzle
