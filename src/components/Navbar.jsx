@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { CrossIcon, Logo, ThreeLineIcon } from "../components/icons/Icons";
 import { NavLink } from "react-router-dom";
+import { useThem } from "../Context/Context";
 
-function Navbar({show}) {
+function Navbar({ show }) {
   const [isOpen, setIsOpen] = useState(false);
+  const { setShowSignPop } = useThem();
 
   return (
     <nav className={show && " border-0 md:border-b border-[#29272726]"}>
@@ -63,13 +65,12 @@ function Navbar({show}) {
               ML Summary
             </NavLink>
             <div className=" h-[1px] w-full bg-[#00000040] lg:hidden"></div>
-            <NavLink
+            <button
               className="text-xl lg:text-base xl:text-xl font-normal text-white w-[207px] lg:w-auto text-center bg-[#B99976] rounded-[5px] py-2 px-5"
-              to="/sign-up"
-              onClick={() => setIsOpen(false)}
+              onClick={() => (setIsOpen(false), setShowSignPop(true))}
             >
               Sign Up
-            </NavLink>
+            </button>
           </div>
         </div>
       </div>
