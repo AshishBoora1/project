@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import Slider from "react-slick";
 import mobile_img from "../assets/images/png/mobile_img.png";
 import firstfroupimg from "../assets/images/png/firstfroupimg.png";
@@ -9,7 +11,7 @@ import imgleft from "../assets/images/png/imgleft.png";
 import rightimg from "../assets/images/png/rightimg.png";
 import { ArrowIcon, EmailIcon, LineIcon } from "../components/icons/Icons";
 import Navbar from "../components/Navbar";
-
+import { NavLink } from "react-router-dom";
 function PrevArrow(props) {
   const { onClick } = props;
   return (
@@ -50,6 +52,12 @@ function Home() {
     prevArrow: <PrevArrow />,
     nextArrow: <NextArrow />,
   };
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
 
   return (
     <div>
@@ -64,7 +72,12 @@ function Home() {
           <div>
             <Navbar />
           </div>
-          <div className="mt-[90px] pt_30">
+          <div
+            className="mt-[90px] pt_30"
+            data-aos="fade-right"
+            data-aos-offset="300"
+            data-aos-easing="ease-in-sine"
+          >
             <div className="text-center">
               <h1 className="ff_promt text-[30px] lg:text-[60px]  xl:text-[90px] font-normal text-[#292727]">
                 Learn Entertain Grow
@@ -73,13 +86,18 @@ function Home() {
                 Salad neque ut faucibus feugiat arcu enim augue sodales.
                 Maecenas mattis elementum pretium arcu eget eget.
               </p>
-              <button className="text-base  xl:text-xl font-normal text-white bg-[#B99976] rounded-[5px] py-[10px] mt-5 md:mt-[35px] px-5">
-                Check our apps
-              </button>
+              <div className="mt-5 md:mt-[35px]">
+                <NavLink
+                  to={"/subscriptions"}
+                  className="text-base  xl:text-xl font-normal text-white bg-[#B99976] rounded-[5px] py-[10px]  px-5"
+                >
+                  Check our apps
+                </NavLink>
+              </div>
             </div>
 
             <div className=" mt-16  xl:mt-[45px] relative">
-              <Slider {...settings} className="flex items-center">
+              {/* <Slider {...settings} className="flex items-center">
                 {[1, 2, 3, 4, 5].map((i, index) => (
                   <div key={index}>
                     <div className=" text-center  xl:w-[1100px] mx-auto">
@@ -91,7 +109,14 @@ function Home() {
                     </div>
                   </div>
                 ))}
-              </Slider>
+              </Slider> */}
+              <div className=" text-center  xl:w-[1100px] mx-auto">
+                <img
+                  className="w-[80%] mx-auto  md:w-full"
+                  src={mobile_img}
+                  alt="mobile_img"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -209,20 +234,36 @@ function Home() {
                     <h4 className="font-medium mt-4 text-base sm:text-lg xl:text-xl text-[#292727]">
                       The game has 3 regimes
                     </h4>
-                    <ol className=" !list-disc marker:text-[#B99976]">
-                      <li className="font-normal mt-4 text-base sm:text-lg xl:text-xl text-[#292727]">
-                        <span className="text-[#B99976]">Classic</span> - Play
-                        for rest. Designed for improvement strategy skills
-                      </li>
-                      <li className="font-normal mt-4 text-base sm:text-lg xl:text-xl text-[#292727]">
-                        <span className="text-[#B99976]">Timer</span> - Play for
-                        fun. Best for brain speed training.
-                      </li>
-                      <li className="font-normal mt-4 text-base sm:text-lg xl:text-xl text-[#292727]">
-                        <span className="text-[#B99976]">Blast</span> - Play for
-                        interest. Additional difficulty for advanced players!
-                      </li>
-                    </ol>
+                    <div className=" marker:text-[#B99976]">
+                      <div className=" flex items-start">
+                        <div>
+                          <div className="h-[8px] w-[8px] bg-[#B99976] rounded-full mt-6"></div>
+                        </div>
+                        <p className="font-normal mt-4 text-base ps-2 sm:ps-3 sm:text-lg xl:text-xl text-[#292727]">
+                          <span className="text-[#B99976]">Classic</span> - Play
+                          for rest. Designed for improvement strategy skills
+                        </p>
+                      </div>
+                      <div className=" flex items-start">
+                        <div>
+                          <div className="h-[8px] w-[8px] bg-[#B99976] rounded-full mt-6"></div>
+                        </div>
+                        <p className="font-normal mt-4 text-base ps-2 sm:ps-3 sm:text-lg xl:text-xl text-[#292727]">
+                          <span className="text-[#B99976]">Timer</span> - Play
+                          for fun. Best for brain speed training.
+                        </p>
+                      </div>
+                      <div className=" flex items-start">
+                        <div>
+                          <div className="h-[8px] w-[8px] bg-[#B99976] rounded-full mt-6"></div>
+                        </div>
+                        <p className="font-normal mt-4 text-base ps-2 sm:ps-3 sm:text-lg xl:text-xl text-[#292727]">
+                          <span className="text-[#B99976]">Blast</span> - Play
+                          for interest. Additional difficulty for advanced
+                          players!
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

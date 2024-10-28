@@ -33,21 +33,6 @@ function Navbar({ show }) {
                 <CrossIcon />
               </button>
             </div>
-            <NavLink
-              className="text-xl lg:text-base xl:text-xl font-normal text-[#292727] hover:text-[#1A1615]"
-              to="/"
-              onClick={() => setIsOpen(false)}
-            >
-              Home
-            </NavLink>
-            <div className=" h-[1px] w-full bg-[#00000040] lg:hidden"></div>
-            <NavLink
-              className="text-xl lg:text-base xl:text-xl font-normal text-[#292727] hover:text-[#1A1615]"
-              to="/subscriptions"
-              onClick={() => setIsOpen(false)}
-            >
-              Salad Web App
-            </NavLink>
             <div className=" h-[1px] w-full bg-[#00000040] lg:hidden"></div>
             <NavLink
               className="text-xl lg:text-base xl:text-xl font-normal text-[#292727] hover:text-[#1A1615]"
@@ -63,6 +48,14 @@ function Navbar({ show }) {
               onClick={() => setIsOpen(false)}
             >
               ML Summary
+            </NavLink>
+            <div className=" h-[1px] w-full bg-[#00000040] lg:hidden"></div>
+            <NavLink
+              className="text-xl lg:text-base xl:text-xl font-normal text-[#292727] hover:text-[#1A1615]"
+              to="/"
+              onClick={() => setIsOpen(false)}
+            >
+              Space Block Puzzle
             </NavLink>
             <div className=" h-[1px] w-full bg-[#00000040] lg:hidden"></div>
             <button

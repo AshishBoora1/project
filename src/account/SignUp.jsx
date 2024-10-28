@@ -91,7 +91,7 @@ function SignUp() {
                     required
                     onChange={onhandelchange}
                     value={usersignup.repassword}
-                    placeholder="Re-enter Password"
+                    placeholder="Check Password"
                     type={!showhiderepassword ? "password" : "text"}
                     name="repassword"
                   />

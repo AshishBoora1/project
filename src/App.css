@@ -27,3 +27,14 @@
     height: auto;
   }
 }
+
+[data-aos^="fade"][data-aos^="fade"].aos-animate {
+  opacity: 1 !important;
+  transform: translateZ(0) !important;
+  transition: all 2s !important;
+}
+
+[data-aos="fade-right"] {
+  transform: translate3d(-400px, 0, 0) !important;
+   transition: all 2s !important;
+}
