@@ -20,7 +20,7 @@ function App() {
         <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-md z-[80]"></div>
       )}
       {showsignpop && (
-        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[100]">
+        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[100] w-full md:w-auto">
           <SignUp />
         </div>
       )}
