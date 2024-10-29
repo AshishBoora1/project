@@ -4,7 +4,7 @@ import SignIn from "./SignIn";
 import { useThem } from "../Context/Context";
 
 function Auth() {
-  const { showhidecontext, setShowHideContext } = useThem();
+  const { showhidecontext } = useThem();
   return (
     <div>
       {showhidecontext === <div></div> ? null : showhidecontext === false ? (
