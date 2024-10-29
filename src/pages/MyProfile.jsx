@@ -9,8 +9,6 @@ export default function MyProfile() {
 
   function onhadelsubmit(e) {
     e.preventDefault();
-    console.log("Name:", name);
-    console.log("Email:", email);
   }
 
   return (
