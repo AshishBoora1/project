@@ -7,6 +7,7 @@ export const Context = createContext({
 export const ContextProvider = ({ children }) => {
   const sectionRefs = useRef([]);
   const [showsignpop, setShowSignPop] = useState(false);
+  const [showhidecontext, setShowHideContext] = useState(null);
   const scrollToNextSection = (index) => {
     sectionRefs.current[index]?.scrollIntoView({
       behavior: "smooth",
@@ -14,7 +15,14 @@ export const ContextProvider = ({ children }) => {
   };
   return (
     <Context.Provider
-      value={{ showsignpop, setShowSignPop, scrollToNextSection, sectionRefs }}
+      value={{
+        showsignpop,
+        setShowSignPop,
+        scrollToNextSection,
+        sectionRefs,
+        showhidecontext,
+        setShowHideContext,
+      }}
     >
       {children}
     </Context.Provider>

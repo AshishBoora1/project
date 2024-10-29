@@ -5,7 +5,7 @@ import { useThem } from "../Context/Context";
 
 function Navbar({ show }) {
   const [isOpen, setIsOpen] = useState(false);
-  const { setShowSignPop, scrollToNextSection } = useThem();
+  const { setShowSignPop, scrollToNextSection, setShowHideContext } = useThem();
 
   return (
     <nav className={show && " border-0 md:border-b border-[#29272726]"}>
@@ -59,7 +59,7 @@ function Navbar({ show }) {
             <div className=" h-[1px] w-full bg-[#00000040] lg:hidden"></div>
             <button
               className="text-xl lg:text-base xl:text-xl font-normal text-white w-[207px] lg:w-auto text-center bg-[#B99976] rounded-[5px] py-2 px-5"
-              onClick={() => (setIsOpen(false), setShowSignPop(true))}
+              onClick={() => (setIsOpen(false), setShowHideContext(false))}
             >
               Sign Up
             </button>
