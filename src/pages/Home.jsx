@@ -10,9 +10,9 @@ import clientiimg from "../assets/images/png/clientiimg.png";
 import imgleft from "../assets/images/png/imgleft.png";
 import rightimg from "../assets/images/png/rightimg.png";
 import { ArrowIcon, EmailIcon, LineIcon } from "../components/icons/Icons";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/common/Navbar.jsx";
 import { NavLink } from "react-router-dom";
-import { useThem } from "../Context/Context";
+import { useThem } from "../Context/Context.jsx";
 function PrevArrow(props) {
   const { onClick } = props;
   return (

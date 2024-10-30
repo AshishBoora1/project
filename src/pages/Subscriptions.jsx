@@ -1,6 +1,6 @@
 import React from "react";
 import { CardData } from "../components/Helper/Helper.jsx";
-import Navbar from "../components/Navbar.jsx";
+import Navbar from "../components/common/Navbar.jsx";
 import { EmailIcon } from "../components/icons/Icons.jsx";
 import { NavLink } from "react-router-dom";
 

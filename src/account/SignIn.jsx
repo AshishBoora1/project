@@ -8,32 +8,50 @@ import {
 import googleicon from "../assets/images/svg/googleicon.svg";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useThem } from "../Context/Context";
-import SignUp from "./SignUp";
+import { toast, ToastContainer } from "react-toastify";
 function SignIn() {
   const [usersignin, setUserSignIn] = useState({
     email: "",
     password: "",
   });
-  const { setShowSignPop, setShowHideContext } = useThem();
+  const { setShowHideContext, LoginUser, setLoading } = useThem();
   const [showhide, setShowHide] = useState(false);
   function onhandelchange(e) {
     const { name, value } = e.target;
     setUserSignIn({ ...usersignin, [name]: value });
   }
 
-  const navgate = useNavigate();
+  const navigate = useNavigate();
   function onhadelsubmit(e) {
     e.preventDefault();
-    setUserSignIn({
-      email: "",
-      password: "",
-    });
-    setShowSignPop(false);
-    navgate("/");
+    LoginUser(usersignin.email, usersignin.password)
+      .then((result) => {
+        if (result.success) {
+          setShowHideContext(null);
+          toast.success(result.message, {
+            onClose: () => {
+              navigate("/");
+            },
+            autoClose: 2000,
+          });
+          setUserSignIn({
+            email: "",
+            password: "",
+          });
+          localStorage.setItem("userlogin", true);
+        } else {
+          toast.error(result.message || "SignIn failed");
+        }
+      })
+      .catch((error) => {
+        console.error("SignIn error:", error);
+        toast.error("An error occurred during signin.");
+      });
   }
+
   return (
     <>
-      <div className=" bg-white md:rounded-[20px] md:border-[2px] border-[#D4D4D4]  px-[34px] md:px-[70px] pb-[35px] pt-10 w-full md:w-[500px] gap-5 min-h-screen md:min-h-full   md:h-[570px] h_auto overflow-auto relative flex flex-col justify-evenly md:justify-between items-center">
+      <div className=" bg-white md:rounded-[20px] md:border-[2px] border-[#D4D4D4]  px-[34px] md:px-[70px] pb-[35px] pt-10  w-screen md:w-[500px] gap-5 min-h-screen md:min-h-full   md:h-[570px] h_auto overflow-auto relative flex flex-col justify-evenly md:justify-between items-center">
         <button
           className=" absolute right-5 top-5"
           onClick={() => setShowHideContext(null)}
@@ -110,6 +128,7 @@ function SignIn() {
             </button>
           </div>
         </div>
+        <ToastContainer />
       </div>
     </>
   );

@@ -5,15 +5,17 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import SignUp from "./account/SignUp";
 import SignIn from "./account/SignIn";
+import VerifyEmail from "./components/common/VerifyEmail";
 import Home from "./pages/Home";
 import MyProfile from "./pages/MyProfile";
 import Subscriptions from "./pages/Subscriptions";
 import { Route, Routes } from "react-router-dom";
 import { useThem } from "./Context/Context";
 import Auth from "./account/Auth";
+import Loader from "./components/common/Loader"
 
 function App() {
-  const { showsignpop, showhidecontext } = useThem();
+  const { showsignpop, showhidecontext, loading } = useThem();
 
   return (
     <div>
@@ -24,15 +26,18 @@ function App() {
       )}
       {/* {showsignpop && ( */}
       <div
-        className={`fixed top-1/2 left-1/2 -translate-x-1/2 duration-700 -translate-y-1/2 z-[100] w-full md:w-auto ${
+        className={`fixed top-1/2 left-1/2 -translate-x-1/2 duration-700 -translate-y-1/2 z-[100] h-screen w-screen flex justify-center items-center ${
           showhidecontext === null ? "scale-0" : " scale-100"
         }`}
       >
         <Auth />
       </div>
+
+      {loading && <Loader/>}
       {/* )} */}
       <Routes>
         <Route index element={<Home />} />
+        <Route path="verify-email" element={<VerifyEmail />} />
         <Route path="my-profile" element={<MyProfile />} />
         <Route path="subscriptions" element={<Subscriptions />} />
       </Routes>

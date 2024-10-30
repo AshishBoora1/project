@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/common/Navbar.jsx";
 import { NavLink } from "react-router-dom";
 import { EmailIcon } from "../components/icons/Icons";
 

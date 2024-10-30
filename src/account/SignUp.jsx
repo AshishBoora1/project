@@ -9,14 +9,13 @@ import googleicon from "../assets/images/svg/googleicon.svg";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { useThem } from "../Context/Context";
-import SignIn from "./SignIn";
 function SignUp() {
   const [usersignup, setUserSignUp] = useState({
     email: "",
     password: "",
     repassword: "",
   });
-  const { setShowSignPop, setShowHideContext } = useThem();
+  const { setShowSignPop, setShowHideContext, SignUpUser } = useThem();
   const [showhide, setShowHide] = useState(false);
   const [showhiderepassword, setShowHideRePassword] = useState(false);
   function onhandelchange(e) {
@@ -24,27 +23,44 @@ function SignUp() {
     setUserSignUp({ ...usersignup, [name]: value });
   }
 
-  const navgate = useNavigate();
+  const navigate = useNavigate();
   function onhadelsubmit(e) {
     e.preventDefault();
     if (usersignup.password.length < 8 || usersignup.repassword.length < 8) {
-      toast.error("password more then 8 chractors!");
+      toast.error("Password must be more than 8 characters!");
     } else if (usersignup.password !== usersignup.repassword) {
-      toast.error("Password not match!");
+      toast.error("Passwords do not match!");
     } else {
-      setUserSignUp({
-        email: "",
-        password: "",
-        repassword: "",
-      });
-      setShowSignPop(false);
-      navgate("/");
+      SignUpUser(usersignup.email, usersignup.password)
+        .then((result) => {
+          if (result.success) {
+            setUserSignUp({
+              email: "",
+              password: "",
+              repassword: "",
+            });
+            setShowHideContext(null);
+            toast.info("Please check your email and to activate account", {
+              onClose: () => {
+                navigate("/");
+                localStorage.setItem("userlogin", true);
+              },
+              autoClose: 2000,
+            });
+          } else {
+            toast.error(result.message || "Signup failed");
+          }
+        })
+        .catch((error) => {
+          console.error("Signup error:", error);
+          toast.error("An error occurred during signup.");
+        });
     }
   }
 
   return (
     <>
-      <div className=" bg-white md:rounded-[20px] md:border-[2px] border-[#D4D4D4]  px-[34px] md:px-[70px] py-10 w-full md:w-[500px] gap-5 min-h-screen md:min-h-full  md:h-[570px] h_auto overflow-auto flex flex-col justify-evenly relative md:justify-between items-center">
+      <div className=" bg-white md:rounded-[20px] md:border-[2px] border-[#D4D4D4]  px-[34px] md:px-[70px] py-10 w-screen md:w-[500px] gap-5 min-h-screen md:min-h-full  md:h-[570px] h_auto overflow-auto flex flex-col justify-evenly relative md:justify-between items-center">
         <button
           className=" absolute right-5 top-5"
           onClick={() => setShowHideContext(null)}
@@ -138,6 +154,7 @@ function SignUp() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
