@@ -37,7 +37,7 @@ function App() {
       {/* )} */}
       <Routes>
         <Route index element={<Home />} />
-        <Route path="verify-email:/token" element={<VerifyEmail />} />
+        <Route path="verify-email/:token" element={<VerifyEmail />} />
         <Route path="my-profile" element={<MyProfile />} />
         <Route path="subscriptions" element={<Subscriptions />} />
       </Routes>
