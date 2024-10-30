@@ -33,11 +33,11 @@ function App() {
         <Auth />
       </div>
 
-      {loading && <Loader/>}
+      {loading && <Loader />}
       {/* )} */}
       <Routes>
         <Route index element={<Home />} />
-        <Route path="verify-email" element={<VerifyEmail />} />
+        <Route path="verify-email:/token" element={<VerifyEmail />} />
         <Route path="my-profile" element={<MyProfile />} />
         <Route path="subscriptions" element={<Subscriptions />} />
       </Routes>
