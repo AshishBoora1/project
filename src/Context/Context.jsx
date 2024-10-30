@@ -8,6 +8,7 @@ export const Context = createContext({
 export const ContextProvider = ({ children }) => {
   const sectionRefs = useRef([]);
   const [loading, setLoading] = useState(false);
+  const [useremail, setUserEmail] = useState("")
   const [showsignpop, setShowSignPop] = useState(false);
   const [showhidecontext, setShowHideContext] = useState(null);
   const scrollToNextSection = (index) => {
@@ -115,6 +116,28 @@ export const ContextProvider = ({ children }) => {
     }
   }
 
+  //////////////        verify email  /////////////
+
+  async function VerifyEmail(token) {
+    setLoading(true);
+    try {
+      let response = await fetch(
+        `https://gerapps-440892549125.us-central1.run.app/api/auth/verify_email?token=${token}`
+      );
+      setLoading(false);
+      if (response.status === 200) {
+        return { success: true, message: "Login successfully" };
+      }
+
+      if (response.status === 404) {
+        return { success: false, message: "SignUp Failed" };
+      }
+    } catch (error) {
+      console.error("SignUp failed:", error);
+      setLoading(false);
+    }
+  }
+
   //////////////
 
   return (
@@ -131,6 +154,9 @@ export const ContextProvider = ({ children }) => {
         LogoutUser,
         loading,
         setLoading,
+        VerifyEmail,
+        setUserEmail,
+        useremail,
       }}
     >
       {children}

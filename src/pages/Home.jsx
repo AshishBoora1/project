@@ -91,12 +91,11 @@ function Home() {
                 Maecenas mattis elementum pretium arcu eget eget.
               </p>
               <div className="mt-5 md:mt-[35px]">
-                <NavLink
-                  to={"/subscriptions"}
+                <button
                   className="text-base  xl:text-xl font-normal text-white bg-[#B99976] rounded-[5px] py-[10px]  px-5"
                 >
                   Check our apps
-                </NavLink>
+                </button>
               </div>
             </div>
 

@@ -6,7 +6,7 @@ import {
   ShowPassIcon,
 } from "../components/icons/Icons";
 import googleicon from "../assets/images/svg/googleicon.svg";
-import { NavLink, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { useThem } from "../Context/Context";
 function SignUp() {
@@ -15,7 +15,7 @@ function SignUp() {
     password: "",
     repassword: "",
   });
-  const { setShowSignPop, setShowHideContext, SignUpUser } = useThem();
+  const {setShowHideContext, SignUpUser } = useThem();
   const [showhide, setShowHide] = useState(false);
   const [showhiderepassword, setShowHideRePassword] = useState(false);
   function onhandelchange(e) {
@@ -34,6 +34,7 @@ function SignUp() {
       SignUpUser(usersignup.email, usersignup.password)
         .then((result) => {
           if (result.success) {
+            setUserEmail(usersignup.email);
             setUserSignUp({
               email: "",
               password: "",
@@ -43,7 +44,6 @@ function SignUp() {
             toast.info("Please check your email and to activate account", {
               onClose: () => {
                 navigate("/");
-                localStorage.setItem("userlogin", true);
               },
               autoClose: 2000,
             });
