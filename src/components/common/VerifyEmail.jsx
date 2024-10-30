@@ -1,6 +1,9 @@
 import React from "react";
+import { useSearchParams } from "react-router-dom";
 
 function VerifyEmail() {
+   const [searchParams] = useSearchParams();
+   const token = searchParams.get("token");
   return (
     <div>
       <div className="w-full bg-white h-screen relative flex flex-col items-center justify-center">
