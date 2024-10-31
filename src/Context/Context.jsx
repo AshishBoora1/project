@@ -124,30 +124,24 @@ export const ContextProvider = ({ children }) => {
   //////////////        verify email  /////////////
 
   async function VerifyEmail(token) {
+    console.log("..............................." , token);
+    
     setLoading(true);
     try {
       // localStorage.setItem("token", token);
       let response = await fetch(
-        `https://gerapps-440892549125.us-central1.run.app/api/auth/verify_email`
+        `https://gerapps-440892549125.us-central1.run.app/api/auth/verify_email?token=${token}`
       );
       setLoading(false);
       if (response.status === 200) {
         return { success: true, message: "Login successfully" };
       }
-      // if (response.status === 200) {
-      //   const data = await response.json();
-      //   const loginValue = localStorage.getItem("login");
-      //   if (loginValue) {
-      //     Cookies.set("user_token", loginValue, { path: "/", secure: true });
-      //   }
-      //   return { success: true, message: "Account Successfully logged in" };
-      // }
 
       if (response.status === 404) {
-        return { success: false, message: "SignUp Failed" };
+        return { success: false, message: "VerifyEmail Failed" };
       }
     } catch (error) {
-      console.error("SignUp failed:", error);
+      console.error("VerifyEmail failed:", error);
       setLoading(false);
     }
   }
