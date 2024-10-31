@@ -60,7 +60,7 @@ function SignUp() {
 
   return (
     <>
-      <div className=" bg-white md:rounded-[20px] md:border-[2px] border-[#D4D4D4]  px-[34px] md:px-[70px] pt-5 pb-10 w-screen md:w-[500px] gap-5 h-screen md:min-h-full  md:h-[570px] h_auto overflow-auto flex flex-col justify-evenly relative md:justify-between items-center">
+      <div className=" bg-white md:rounded-[20px] md:border-[2px] border-[#D4D4D4]  px-[34px] md:px-[70px]  py-10 w-screen md:w-[500px] gap-5 h-screen md:min-h-full  md:h-[570px] h_auto overflow-auto flex flex-col justify-evenly relative md:justify-between items-center">
         <div className=" flex justify-end items-end w-full">
           <button onClick={() => setShowHideContext(null)}>
             <CrossIcon clr={"#ccc"} />
