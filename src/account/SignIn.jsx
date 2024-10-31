@@ -51,7 +51,7 @@ function SignIn() {
 
   return (
     <>
-      <div className=" bg-white md:rounded-[20px] md:border-[2px] border-[#D4D4D4]  px-[34px] md:px-[70px] pb-[35px] pt-10  w-screen md:w-[500px] gap-5 min-h-screen md:min-h-full   md:h-[570px] h_auto overflow-auto relative flex flex-col justify-evenly md:justify-between items-center">
+      <div className=" bg-white md:rounded-[20px] md:border-[2px] border-[#D4D4D4]  px-[34px] md:px-[70px] pb-[35px] pt-10  w-screen md:w-[500px] gap-5 h-screen md:min-h-full   md:h-[570px] h_auto overflow-auto relative flex flex-col justify-evenly md:justify-between items-center">
         <div className=" flex justify-end items-end w-full">
           <button onClick={() => setShowHideContext(null)}>
             <CrossIcon clr={"#ccc"} />
