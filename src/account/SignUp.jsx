@@ -60,7 +60,7 @@ function SignUp() {
 
   return (
     <>
-      <div className=" bg-white md:rounded-[20px] md:border-[2px] border-[#D4D4D4]  px-[34px] md:px-[70px] py-10 w-screen md:w-[500px] gap-5 min-h-screen md:min-h-full  md:h-[570px] h_auto overflow-auto flex flex-col justify-evenly relative md:justify-between items-center">
+      <div className=" bg-white md:rounded-[20px] md:border-[2px] border-[#D4D4D4]  px-[34px] md:px-[70px] py-10 w-screen md:w-[500px] gap-5 h-screen md:min-h-full  md:h-[570px] h_auto overflow-auto flex flex-col justify-evenly relative md:justify-between items-center">
         <button
           className=" absolute right-5 top-5"
           onClick={() => setShowHideContext(null)}
@@ -127,7 +127,7 @@ function SignUp() {
             </div>
             <button
               type="button"
-              className=" bg-[#4285F4] rounded-[7px] p-1 flex items-center w-full gap-10"
+              className=" bg-[#4285F4] rounded-[7px] p-1 flex items-center w-full gap-5 sm:gap-10"
             >
               <img src={googleicon} alt="googleicon" />
               <span className=" text-white font-normal text-lg text-nowrap">
@@ -138,11 +138,11 @@ function SignUp() {
         </div>
         <div>
           <div className=" flex gap-2  items-center w-full">
-            <div className=" min-w-[50px] h-[1px] bg-[#292727] opacity-50"></div>
+            <div className=" sm:min-w-[50px] h-[1px] bg-[#292727] opacity-50"></div>
             <p className=" font-normal text-base text-[#292727] opacity-50 text-nowrap">
               Already have an account?
             </p>
-            <div className="min-w-[50px] h-[1px] bg-[#292727] opacity-50"></div>
+            <div className="sm:min-w-[50px] h-[1px] bg-[#292727] opacity-50"></div>
           </div>
           <div
             className=" text-center  mt-[30px]"

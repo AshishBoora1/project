@@ -101,7 +101,7 @@ function SignIn() {
             </div>
             <button
               type="button"
-              className=" bg-[#4285F4] rounded-[7px] p-1 flex items-center w-full gap-10"
+              className=" bg-[#4285F4] rounded-[7px] p-1 flex items-center w-full gap-5 sm:gap-10"
             >
               <img src={googleicon} alt="googleicon" />
               <span className=" text-white font-normal text-lg">
@@ -112,11 +112,11 @@ function SignIn() {
         </div>
         <div>
           <div className=" flex gap-2  items-center w-full">
-            <div className=" min-w-[50px] h-[1px] bg-[#292727] opacity-50"></div>
+            <div className=" sm:min-w-[50px] h-[1px] bg-[#292727] opacity-50"></div>
             <p className=" font-normal text-base text-[#292727] opacity-50 text-nowrap">
               Don’t have an account?
             </p>
-            <div className="min-w-[50px] h-[1px] bg-[#292727] opacity-50"></div>
+            <div className="sm:min-w-[50px] h-[1px] bg-[#292727] opacity-50"></div>
           </div>
           <div className=" text-center  mt-[30px]">
             <button
