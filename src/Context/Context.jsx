@@ -124,8 +124,8 @@ export const ContextProvider = ({ children }) => {
   //////////////        verify email  /////////////
 
   async function VerifyEmail(token) {
-    console.log("..............................." , token);
-    
+    console.log("...............................", token);
+
     setLoading(true);
     try {
       // localStorage.setItem("token", token);
@@ -149,48 +149,59 @@ export const ContextProvider = ({ children }) => {
   async function subscriptions() {
     setLoading(true);
     try {
-      // localStorage.setItem("token", token);
-      let response = await fetch(
-        `https://gerapps-440892549125.us-central1.run.app/api/user/get_user_apps`
-      );
-      setLoading(false);
-      if (response.status === 200) {
-        let fechdata = await response.json();
-        console.log(fechdata);
-        // setGetSubscriptionsData(fechdata);
-      }
+      const userToken = Cookies.get("user_token"); // Get user_token from cookies
+      console.log("okkkk")
+      let response = await fetch("https://gerapps-440892549125.us-central1.run.app/api/user/get_user_apps", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${userToken}`, // Use token from cookies
+        },
+        credentials: "include" // Include cookies in the request
+      });
 
-      if (response.status === 404) {
+      setLoading(false);
+
+      if (response.status === 200) {
+        let data = await response.json();
+        setGetSubscriptionsData(data);
+      } else {
         setGetSubscriptionsData([]);
       }
     } catch (error) {
+      const userToken = Cookies.get("user_token");
+      console.log(userToken)
       console.error("subscriptions failed:", error);
+      console.log()
       setLoading(false);
     }
   }
 
-  ///////////////////     username     ///////////////////
-  // new_user_name=sunaina
-
-  async function UserName() {
+  // Change Username API call
+  async function UserName(newUserName) {
     setLoading(true);
     try {
-      // localStorage.setItem("token", token);
-      let response = await fetch(
-        `https://gerapps-440892549125.us-central1.run.app/api/user/change_user_name?new_user_name=sunaina?user_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2VtYWlsIjoiYXNoaXNoYXNoaXNoYm9vcmEwMDFAZ21haWwuY29tIiwiZXhwIjoxNzQxMTgxNTk3fQ.nbGPSJqUaHhbpGcz0X_0Ersv8cPghUGgNNkj-YDimvI`
-      );
-      setLoading(false);
-      if (response.status === 200) {
-        let fechdata = await response.json();
-        console.log(fechdata);
-        // setGetUserName(fechdata);
-      }
+      const userToken = Cookies.get("user_token"); // Get user_token from cookies
 
-      if (response.status === 404) {
+      let response = await fetch(`https://gerapps-440892549125.us-central1.run.app/api/user/change_user_name?new_user_name=${newUserName}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${userToken}`, // Use token from cookies
+        },
+        credentials: "include" // Include cookies in the request
+      });
+
+      setLoading(false);
+
+      if (response.status === 200) {
+        let data = await response.json();
+        setGetUserName(data);
+      } else {
         setGetUserName("");
       }
     } catch (error) {
-      console.error("UserName failed:", error);
+      console.error("UserName change failed:", error);
       setLoading(false);
     }
   }
