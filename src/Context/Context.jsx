@@ -126,22 +126,22 @@ export const ContextProvider = ({ children }) => {
   async function VerifyEmail(token) {
     setLoading(true);
     try {
-      localStorage.setItem("token", token);
+      // localStorage.setItem("token", token);
       let response = await fetch(
         `https://gerapps-440892549125.us-central1.run.app/api/auth/verify_email`
       );
       setLoading(false);
-      if (response.status === 200) {
-        return { success: true, message: "Login successfully" };
-      }
       // if (response.status === 200) {
-      //   const data = await response.json();
-      //   const loginValue = localStorage.getItem("login");
-      //   if (loginValue) {
-      //     Cookies.set("user_token", loginValue, { path: "/", secure: true });
-      //   }
-      //   return { success: true, message: "Account Successfully logged in" };
+      //   return { success: true, message: "Login successfully" };
       // }
+      if (response.status === 200) {
+        const data = await response.json();
+        const loginValue = localStorage.getItem("login");
+        if (loginValue) {
+          Cookies.set("user_token", loginValue, { path: "/", secure: true });
+        }
+        return { success: true, message: "Account Successfully logged in" };
+      }
 
       if (response.status === 404) {
         return { success: false, message: "SignUp Failed" };
