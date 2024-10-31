@@ -32,7 +32,7 @@ function SignIn() {
             onClose: () => {
               navigate("/");
             },
-            autoClose: 2000,
+            autoClose: 1500,
           });
           setUserSignIn({
             email: "",

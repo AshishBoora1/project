@@ -71,12 +71,13 @@ export const ContextProvider = ({ children }) => {
         }
       );
       setLoading(false);
-
-
-      let fech = await response.json();
-
       if (response.status === 200) {
-        return { success: true, message: "Account Successfully login" };
+        const data = await response.json();
+        const loginValue = localStorage.getItem("login");
+        if (loginValue) {
+          Cookies.set("user_token", loginValue, { path: "/", secure: true });
+        }
+        return { success: true, message: "Account Successfully logged in" };
       }
 
       if (response.status === 404) {
@@ -127,11 +128,19 @@ export const ContextProvider = ({ children }) => {
     try {
       localStorage.setItem("token", token);
       let response = await fetch(
-        `https://gerapps-440892549125.us-central1.run.app/api/auth/verify_email?token=${token}`
+        `https://gerapps-440892549125.us-central1.run.app/api/auth/verify_email`
       );
       setLoading(false);
+      // if (response.status === 200) {
+      //   return { success: true, message: "Login successfully" };
+      // }
       if (response.status === 200) {
-        return { success: true, message: "Login successfully" };
+        const data = await response.json();
+        const loginValue = localStorage.getItem("login");
+        if (loginValue) {
+          Cookies.set("user_token", loginValue, { path: "/", secure: true });
+        }
+        return { success: true, message: "Account Successfully logged in" };
       }
 
       if (response.status === 404) {
@@ -143,12 +152,12 @@ export const ContextProvider = ({ children }) => {
     }
   }
   ////////////            Subscriptions            //////////////
-  async function Subscriptions() {
+  async function subscriptions() {
     setLoading(true);
     try {
-      localStorage.setItem("token", token);
+      // localStorage.setItem("token", token);
       let response = await fetch(
-        `https://gerapps-440892549125.us-central1.run.app/api/user/get_user_apps?token=${token}`
+        `https://gerapps-440892549125.us-central1.run.app/api/user/get_user_apps`
       );
       setLoading(false);
       if (response.status === 200) {
@@ -161,7 +170,7 @@ export const ContextProvider = ({ children }) => {
         setGetSubscriptionsData([]);
       }
     } catch (error) {
-      console.error("SignUp failed:", error);
+      console.error("subscriptions failed:", error);
       setLoading(false);
     }
   }
@@ -169,12 +178,12 @@ export const ContextProvider = ({ children }) => {
   ///////////////////     username     ///////////////////
   // new_user_name=sunaina
 
-  async function UserName(username) {
+  async function UserName() {
     setLoading(true);
     try {
-      localStorage.setItem("token", token);
+      // localStorage.setItem("token", token);
       let response = await fetch(
-        `https://gerapps-440892549125.us-central1.run.app/api/user/change_user_name?new_user_name=${username}?token=${token}`
+        `https://gerapps-440892549125.us-central1.run.app/api/user/change_user_name?new_user_name=sunaina?user_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2VtYWlsIjoiYXNoaXNoYXNoaXNoYm9vcmEwMDFAZ21haWwuY29tIiwiZXhwIjoxNzQxMTgxNTk3fQ.nbGPSJqUaHhbpGcz0X_0Ersv8cPghUGgNNkj-YDimvI`
       );
       setLoading(false);
       if (response.status === 200) {
@@ -187,7 +196,7 @@ export const ContextProvider = ({ children }) => {
         setGetUserName("");
       }
     } catch (error) {
-      console.error("SignUp failed:", error);
+      console.error("UserName failed:", error);
       setLoading(false);
     }
   }
@@ -213,6 +222,7 @@ export const ContextProvider = ({ children }) => {
         useremail,
         getsubscriptionsdata,
         UserName,
+        subscriptions,
       }}
     >
       {children}

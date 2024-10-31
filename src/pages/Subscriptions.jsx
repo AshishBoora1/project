@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import { useThem } from "../Context/Context.jsx";
 
 export default function Subscriptions() {
-  const { getsubscriptionsdata } = useThem();
+  const { getsubscriptionsdata, subscriptions, UserName } = useThem();
   return (
     <div className="flex h-screen flex-col justify-between gap-10">
       <div>
@@ -15,12 +15,14 @@ export default function Subscriptions() {
           <div className="flex items-center justify-around mt-5  pt-[50px] lg:pt-[100px]">
             <NavLink
               to={"/subscriptions"}
+              onClick={() => subscriptions()}
               className="text-[15px] lg:text-[22px] w-full font-medium pb-[18px] text-center text-[#B99976] border-b border-[#B99976]"
             >
               Subscriptions
             </NavLink>
             <NavLink
               to={"/my-profile"}
+              onClick={() => UserName()}
               className="text-[15px] lg:text-[22px] font-medium w-full text-center pb-[18px]  border-b border-[#CACACA]"
             >
               My Profile

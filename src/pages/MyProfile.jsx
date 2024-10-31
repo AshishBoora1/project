@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../components/common/Navbar.jsx";
 import { NavLink } from "react-router-dom";
 import { EmailIcon } from "../components/icons/Icons";
+import { useThem } from "../Context/Context.jsx";
 
 export default function MyProfile() {
   const [name, setName] = useState("");
@@ -10,7 +11,7 @@ export default function MyProfile() {
   function onhadelsubmit(e) {
     e.preventDefault();
   }
-
+  const { getsubscriptionsdata, subscriptions, UserName } = useThem();
   return (
     <div className=" h-screen flex flex-col justify-between gap-10">
       <div>
@@ -19,11 +20,13 @@ export default function MyProfile() {
           <div className="flex items-center justify-around mt-5  pt-[50px] lg:pt-[100px]">
             <NavLink
               to={"/subscriptions"}
+              onClick={() => subscriptions()}
               className="text-[15px] lg:text-[22px] w-full font-medium pb-[18px] text-center  border-b border-[#CACACA] "
             >
               Subscriptions
             </NavLink>
             <NavLink
+              onClick={() => UserName()}
               to={"/my-profile"}
               className="text-[15px] lg:text-[22px] font-medium w-full text-center pb-[18px] text-[#B99976] border-b border-[#B99976]"
             >
