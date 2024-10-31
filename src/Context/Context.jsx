@@ -1,6 +1,5 @@
 import { createContext, useContext, useRef, useState } from "react";
-import { json } from "react-router-dom";
-
+import Cookies from "js-cookie";
 export const Context = createContext({
   showsignpop: true,
 });
@@ -8,9 +7,11 @@ export const Context = createContext({
 export const ContextProvider = ({ children }) => {
   const sectionRefs = useRef([]);
   const [loading, setLoading] = useState(false);
-  const [useremail, setUserEmail] = useState("")
+  const [useremail, setUserEmail] = useState("");
   const [showsignpop, setShowSignPop] = useState(false);
   const [showhidecontext, setShowHideContext] = useState(null);
+  const [getsubscriptionsdata, setGetSubscriptionsData] = useState([]);
+  const [getusername, setGetUserName] = useState("");
   const scrollToNextSection = (index) => {
     sectionRefs.current[index]?.scrollIntoView({
       behavior: "smooth",
@@ -71,6 +72,9 @@ export const ContextProvider = ({ children }) => {
       );
       setLoading(false);
 
+
+      let fech = await response.json();
+
       if (response.status === 200) {
         return { success: true, message: "Account Successfully login" };
       }
@@ -121,6 +125,7 @@ export const ContextProvider = ({ children }) => {
   async function VerifyEmail(token) {
     setLoading(true);
     try {
+      localStorage.setItem("token", token);
       let response = await fetch(
         `https://gerapps-440892549125.us-central1.run.app/api/auth/verify_email?token=${token}`
       );
@@ -131,6 +136,55 @@ export const ContextProvider = ({ children }) => {
 
       if (response.status === 404) {
         return { success: false, message: "SignUp Failed" };
+      }
+    } catch (error) {
+      console.error("SignUp failed:", error);
+      setLoading(false);
+    }
+  }
+  ////////////            Subscriptions            //////////////
+  async function Subscriptions() {
+    setLoading(true);
+    try {
+      localStorage.setItem("token", token);
+      let response = await fetch(
+        `https://gerapps-440892549125.us-central1.run.app/api/user/get_user_apps?token=${token}`
+      );
+      setLoading(false);
+      if (response.status === 200) {
+        let fechdata = await response.json();
+        console.log(fechdata);
+        // setGetSubscriptionsData(fechdata);
+      }
+
+      if (response.status === 404) {
+        setGetSubscriptionsData([]);
+      }
+    } catch (error) {
+      console.error("SignUp failed:", error);
+      setLoading(false);
+    }
+  }
+
+  ///////////////////     username     ///////////////////
+  // new_user_name=sunaina
+
+  async function UserName(username) {
+    setLoading(true);
+    try {
+      localStorage.setItem("token", token);
+      let response = await fetch(
+        `https://gerapps-440892549125.us-central1.run.app/api/user/change_user_name?new_user_name=${username}?token=${token}`
+      );
+      setLoading(false);
+      if (response.status === 200) {
+        let fechdata = await response.json();
+        console.log(fechdata);
+        // setGetUserName(fechdata);
+      }
+
+      if (response.status === 404) {
+        setGetUserName("");
       }
     } catch (error) {
       console.error("SignUp failed:", error);
@@ -157,6 +211,8 @@ export const ContextProvider = ({ children }) => {
         VerifyEmail,
         setUserEmail,
         useremail,
+        getsubscriptionsdata,
+        UserName,
       }}
     >
       {children}

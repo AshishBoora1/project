@@ -15,7 +15,7 @@ function SignUp() {
     password: "",
     repassword: "",
   });
-  const {setShowHideContext, SignUpUser } = useThem();
+  const { setShowHideContext, SignUpUser, setUserEmail } = useThem();
   const [showhide, setShowHide] = useState(false);
   const [showhiderepassword, setShowHideRePassword] = useState(false);
   function onhandelchange(e) {
@@ -40,12 +40,12 @@ function SignUp() {
               password: "",
               repassword: "",
             });
-            setShowHideContext(null);
             toast.info("Please check your email and to activate account", {
               onClose: () => {
                 navigate("/");
+                setShowHideContext(null);
               },
-              autoClose: 2000,
+              autoClose: 1500,
             });
           } else {
             toast.error(result.message || "Signup failed");

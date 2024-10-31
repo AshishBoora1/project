@@ -41,7 +41,9 @@ function Navbar({ show }) {
         }`}
       >
         <div className="flex items-center justify-between">
-          <Logo />
+          <NavLink to={"/"}>
+            <Logo />
+          </NavLink>
 
           <div className="lg:hidden">
             <button onClick={() => setIsOpen(true)} className="text-[#292727]">

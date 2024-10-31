@@ -3,8 +3,10 @@ import { CardData } from "../components/Helper/Helper.jsx";
 import Navbar from "../components/common/Navbar.jsx";
 import { EmailIcon } from "../components/icons/Icons.jsx";
 import { NavLink } from "react-router-dom";
+import { useThem } from "../Context/Context.jsx";
 
 export default function Subscriptions() {
+  const { getsubscriptionsdata } = useThem();
   return (
     <div className="flex h-screen flex-col justify-between gap-10">
       <div>
