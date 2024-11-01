@@ -60,23 +60,18 @@ export const ContextProvider = ({ children }) => {
   async function LoginUser(email, password) {
     setLoading(true);
     try {
-      let response = await fetch(
-        "https://gerapps-440892549125.us-central1.run.app/api/auth/email_login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      let response = await fetch("https://gerapps-440892549125.us-central1.run.app/api/auth/email_login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+        credentials: "include" // Ensure cookies are received and stored
+      });
       setLoading(false);
+
       if (response.status === 200) {
         const data = await response.json();
-        const loginValue = localStorage.getItem("login");
-        if (loginValue) {
-          Cookies.set("user_token", loginValue, { path: "/", secure: true });
-        }
         return { success: true, message: "Account Successfully logged in" };
       }
 
@@ -149,15 +144,12 @@ export const ContextProvider = ({ children }) => {
   async function subscriptions() {
     setLoading(true);
     try {
-      const userToken = Cookies.get("user_token"); // Get user_token from cookies
-      console.log("okkkk")
       let response = await fetch("https://gerapps-440892549125.us-central1.run.app/api/user/get_user_apps", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${userToken}`, // Use token from cookies
         },
-        credentials: "include" // Include cookies in the request
+        credentials: "include" // Ensure cookies are sent with the request
       });
 
       setLoading(false);
@@ -169,14 +161,10 @@ export const ContextProvider = ({ children }) => {
         setGetSubscriptionsData([]);
       }
     } catch (error) {
-      const userToken = Cookies.get("user_token");
-      console.log(userToken)
       console.error("subscriptions failed:", error);
-      console.log()
       setLoading(false);
     }
   }
-
   // Change Username API call
   async function UserName(newUserName) {
     setLoading(true);
@@ -187,7 +175,7 @@ export const ContextProvider = ({ children }) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${userToken}`, // Use token from cookies
+          // "Authorization": `Bearer ${userToken}`, // Use token from cookies
         },
         credentials: "include" // Include cookies in the request
       });
