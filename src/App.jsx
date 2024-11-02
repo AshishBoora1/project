@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
-    if (!token || !user) {
+    if (!token && !user) {
       navigate("/");
     }
     console.log("---------------------------");
