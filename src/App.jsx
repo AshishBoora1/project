@@ -17,14 +17,14 @@ import Loader from "./components/common/Loader";
 function App() {
   const { showsignpop, showhidecontext, loading } = useThem();
   const navigate = useNavigate();
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const user = localStorage.getItem("user");
-    if (!token && !user) {
-      navigate("/");
-    }
-    console.log("---------------------------");
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   const user = localStorage.getItem("user");
+  //   if (!token && !user) {
+  //     navigate("/");
+  //   }
+  //   console.log("---------------------------");
+  // }, []);
 
   return (
     <div>
