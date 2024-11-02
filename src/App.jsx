@@ -9,23 +9,14 @@ import VerifyEmail from "./components/common/VerifyEmail";
 import Home from "./pages/Home";
 import MyProfile from "./pages/MyProfile";
 import Subscriptions from "./pages/Subscriptions";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { useThem } from "./Context/Context";
 import Auth from "./account/Auth";
 import Loader from "./components/common/Loader";
+import ProtectRoute from "./components/protectroute/ProtectRoute";
 
 function App() {
-  const { showsignpop, showhidecontext, loading } = useThem();
-  const navigate = useNavigate();
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   const user = localStorage.getItem("user");
-  //   if (!token && !user) {
-  //     navigate("/");
-  //   }
-  //   console.log("---------------------------");
-  // }, []);
-
+  const { showhidecontext, loading } = useThem();
   return (
     <div>
       {showhidecontext !== null ? (
@@ -33,7 +24,6 @@ function App() {
       ) : (
         ""
       )}
-      {/* {showsignpop && ( */}
       <div
         className={`fixed top-1/2 left-1/2 -translate-x-1/2 duration-700 -translate-y-1/2 z-[100] h-screen w-screen flex justify-center items-center ${
           showhidecontext === null ? "scale-0" : " scale-100"
@@ -46,9 +36,18 @@ function App() {
       {/* )} */}
       <Routes>
         <Route index element={<Home />} />
-        <Route path="verify_email" element={<VerifyEmail />} />
-        <Route path="my-profile" element={<MyProfile />} />
-        <Route path="subscriptions" element={<Subscriptions />} />
+        <Route
+          path="verify_email"
+          element={<ProtectRoute Component={VerifyEmail} />}
+        />
+        <Route
+          path="my-profile"
+          element={<ProtectRoute Component={MyProfile} />}
+        />
+        <Route
+          path="subscriptions"
+          element={<ProtectRoute Component={Subscriptions} />}
+        />
       </Routes>
     </div>
   );

@@ -10,9 +10,13 @@ import MLSmmary from "../assets/images/png/MLSmmary.png";
 
 export default function Subscriptions() {
   const { getsubscriptionsdata, subscriptions, UserName } = useThem();
-  useEffect(() => {
-    subscriptions();
-  }, []);
+ useEffect(() => {
+   const login = localStorage.getItem("userlogin");
+   const token = localStorage.getItem("token");
+   if (login && token) {
+     subscriptions();
+   }
+ }, []);
 
   return (
     <div className="flex h-screen flex-col justify-between gap-10">
