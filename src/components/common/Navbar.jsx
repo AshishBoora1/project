@@ -16,10 +16,11 @@ function Navbar({ show }) {
 
   const navigate = useNavigate();
   function LogoutBtn() {
-    localStorage.removeItem("userlogin"), setShowBtn(false);
     LogoutUser()
-      .then((result) => {
-        if (result.success) {
+    .then((result) => {
+      if (result.success) {
+          localStorage.removeItem("token");
+         localStorage.removeItem("userlogin"), setShowBtn(false);
           navigate("/");
           toast.success(result.message);
           setIsOpenDownOpen(false);

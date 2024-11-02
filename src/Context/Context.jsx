@@ -1,5 +1,4 @@
 import { createContext, useContext, useRef, useState } from "react";
-import Cookies from "js-cookie";
 export const Context = createContext({
   showsignpop: true,
 });
@@ -11,7 +10,6 @@ export const ContextProvider = ({ children }) => {
   const [showsignpop, setShowSignPop] = useState(false);
   const [showhidecontext, setShowHideContext] = useState(null);
   const [getsubscriptionsdata, setGetSubscriptionsData] = useState([]);
-  const [getusername, setGetUserName] = useState("");
   const scrollToNextSection = (index) => {
     sectionRefs.current[index]?.scrollIntoView({
       behavior: "smooth",
@@ -38,7 +36,6 @@ export const ContextProvider = ({ children }) => {
         }
       );
       setLoading(false);
-
       if (response.status === 404) {
         return { success: false, message: "Account already exists" };
       }
@@ -72,14 +69,9 @@ export const ContextProvider = ({ children }) => {
       );
       setLoading(false);
       const data = await response.json();
-      console.log(data);
-      
-      
+
       if (response.status === 200) {
-        const loginValue = localStorage.getItem("login");
-        if (loginValue) {
-          Cookies.set("user_token", loginValue, { path: "/", secure: true });
-        }
+        localStorage.setItem("token", data.user_token);
         return { success: true, message: "Account Successfully logged in" };
       }
 
@@ -126,15 +118,15 @@ export const ContextProvider = ({ children }) => {
 
   //////////////        verify email  /////////////
 
-  async function VerifyEmail(token) {    
+  async function VerifyEmail(token) {
     setLoading(true);
     try {
-      // localStorage.setItem("token", token);
       let response = await fetch(
         `https://gerapps-440892549125.us-central1.run.app/api/auth/verify_email?token=${token}`
       );
       setLoading(false);
       if (response.status === 200) {
+        localStorage.setItem("token", token);
         return { success: true, message: "Login successfully" };
       }
 
@@ -150,21 +142,20 @@ export const ContextProvider = ({ children }) => {
   async function subscriptions() {
     setLoading(true);
     try {
-      // localStorage.setItem("token", token);
-      const username = Cookies.get("user_token");
-      console.log(username);
-      
+      const token = localStorage.getItem("token");
       let response = await fetch(
-        `https://gerapps-440892549125.us-central1.run.app/api/user/get_user_apps?user_token=${username}`
+        `https://gerapps-440892549125.us-central1.run.app/api/user/get_user_apps?user_token=${token}`
       );
-      setLoading(false);
-      if (response.status === 200) {
-        let fechdata = await response.json();
-        console.log(fechdata);
-        // setGetSubscriptionsData(fechdata);
-      }
 
-      if (response.status === 404) {
+      if (response.status === 200) {
+        let data = await response.json();
+        let storedata = [];
+        for (const key in data) {
+          storedata.push(data[key]);
+        }
+        setLoading(false);
+        setGetSubscriptionsData(storedata);
+      } else {
         setGetSubscriptionsData([]);
       }
     } catch (error) {
@@ -173,35 +164,56 @@ export const ContextProvider = ({ children }) => {
     }
   }
 
-  ///////////////////     username     ///////////////////
-  // new_user_name=sunaina
+  async function UserName(newUserName) {
+    // console.log(newUserName);
 
-  async function UserName() {
     setLoading(true);
     try {
-      // localStorage.setItem("token", token);
+      const token = localStorage.getItem("token");
       let response = await fetch(
-        `https://gerapps-440892549125.us-central1.run.app/api/user/change_user_name?new_user_name=sunaina`
+        `https://gerapps-440892549125.us-central1.run.app/api/user/change_user_name?new_user_name=${newUserName}&user_token=${token}`
       );
+
       setLoading(false);
       if (response.status === 200) {
-        let fechdata = await response.json();
-        console.log(fechdata);
-        // setGetUserName(fechdata);
-      }
-
-      if (response.status === 404) {
-        setGetUserName("");
+        let data = await response.json();
+        return { success: true, message: data[0] };
+      } else {
+        return { success: false, message: "UserName change failed" };
       }
     } catch (error) {
-      console.error("UserName failed:", error);
+      console.error("UserName change failed:", error);
+      setLoading(false);
+    }
+  }
+
+  ///////////////        delete user
+
+  async function DeleteUser() {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      let response = await fetch(
+        `https://gerapps-440892549125.us-central1.run.app/api/user/delete_user?user_token=${token}`
+      );
+
+      setLoading(false);
+      if (response.status === 200) {
+        let data = await response.json();
+        return {
+          success: true,
+          message: data.data,
+        };
+      } else {
+          return { success: false, message: "User has not been deleted" };
+      }
+    } catch (error) {
+      console.error("User has not been deleted", error);
       setLoading(false);
     }
   }
 
   //////////////
-
-  
 
   return (
     <Context.Provider
@@ -223,6 +235,7 @@ export const ContextProvider = ({ children }) => {
         getsubscriptionsdata,
         UserName,
         subscriptions,
+        DeleteUser,
       }}
     >
       {children}

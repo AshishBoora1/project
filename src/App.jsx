@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import "slick-carousel/slick/slick.css";
@@ -9,13 +9,22 @@ import VerifyEmail from "./components/common/VerifyEmail";
 import Home from "./pages/Home";
 import MyProfile from "./pages/MyProfile";
 import Subscriptions from "./pages/Subscriptions";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { useThem } from "./Context/Context";
 import Auth from "./account/Auth";
-import Loader from "./components/common/Loader"
+import Loader from "./components/common/Loader";
 
 function App() {
   const { showsignpop, showhidecontext, loading } = useThem();
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const user = localStorage.getItem("user");
+    if (!token || !user) {
+      navigate("/");
+    }
+    console.log("---------------------------");
+  }, []);
 
   return (
     <div>

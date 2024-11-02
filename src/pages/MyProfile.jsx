@@ -1,17 +1,52 @@
 import React, { useState } from "react";
 import Navbar from "../components/common/Navbar.jsx";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { EmailIcon } from "../components/icons/Icons";
 import { useThem } from "../Context/Context.jsx";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function MyProfile() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
+  const { getsubscriptionsdata, subscriptions, UserName, DeleteUser } =
+    useThem();
   function onhadelsubmit(e) {
     e.preventDefault();
+    UserName(name)
+      .then((result) => {
+        if (result.success) {
+          toast.success(result.message);
+          setEmail("");
+          setName("");
+        } else {
+          toast.error(result.message || "UserName Change failed");
+        }
+      })
+      .catch((error) => {
+        console.error("UserName error:", error);
+        toast.error("An error occurred during UserName.");
+      });
   }
-  const { getsubscriptionsdata, subscriptions, UserName } = useThem();
+  const navigate = useNavigate();
+  function Onhandeldelete() {
+    DeleteUser()
+      .then((result) => {
+        if (result.success) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("userlogin"), toast.success(result.message);
+          setEmail("");
+          setName("");
+          navigate("/");
+        } else {
+          toast.error(result.message || "deleted user failed");
+        }
+      })
+      .catch((error) => {
+        console.error("deleted user error:", error);
+        toast.error("An error occurred during deleted user.");
+      });
+  }
   return (
     <div className=" h-screen flex flex-col justify-between gap-10">
       <div>
@@ -67,6 +102,7 @@ export default function MyProfile() {
 
               <button
                 type="button"
+                onClick={Onhandeldelete}
                 className="px-[30px] lg:px-[86px] text-white font-normal text-xl bg-[#D7191C] rounded-[7px] py-[15px]"
               >
                 Delete Account
