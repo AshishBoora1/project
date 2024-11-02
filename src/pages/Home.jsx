@@ -11,7 +11,7 @@ import imgleft from "../assets/images/png/imgleft.png";
 import rightimg from "../assets/images/png/rightimg.png";
 import { ArrowIcon, EmailIcon, LineIcon } from "../components/icons/Icons";
 import Navbar from "../components/common/Navbar.jsx";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useThem } from "../Context/Context.jsx";
 function PrevArrow(props) {
   const { onClick } = props;
@@ -42,7 +42,7 @@ function NextArrow(props) {
 }
 
 function Home() {
-  const { sectionRefs } = useThem();
+  const { sectionRefs , setShowHideContext } = useThem();
   const settings = {
     dots: false,
     infinite: true,
@@ -60,9 +60,9 @@ function Home() {
       once: true,
     });
   }, []);
-
-  //  ref={(el) => (sectionRefs.current[3] = el)}
-
+  const isLoggedIn =
+    localStorage.getItem("token") && localStorage.getItem("userlogin");
+const navigate = useNavigate();
   return (
     <div>
       <section className="bg-[#F3F8FA]  relative overflow-hidden">
@@ -92,6 +92,9 @@ function Home() {
               </p>
               <div className="mt-5 md:mt-[35px]">
                 <button
+                  onClick={() =>
+                    isLoggedIn ? navigate("/subscriptions") : setShowHideContext(true)
+                  }
                   className="text-base  xl:text-xl font-normal text-white bg-[#B99976] rounded-[5px] py-[10px]  px-5"
                 >
                   Check our apps

@@ -14,6 +14,7 @@ import { useThem } from "./Context/Context";
 import Auth from "./account/Auth";
 import Loader from "./components/common/Loader";
 import ProtectRoute from "./components/protectroute/ProtectRoute";
+import OAuthCallback from "./pages/OAuthCallback";
 
 function App() {
   const { showhidecontext, loading } = useThem();
@@ -36,10 +37,7 @@ function App() {
       {/* )} */}
       <Routes>
         <Route index element={<Home />} />
-        <Route
-          path="verify_email"
-          element={< VerifyEmail />}
-        />
+        <Route path="verify_email" element={<VerifyEmail />} />
         <Route
           path="my-profile"
           element={<ProtectRoute Component={MyProfile} />}
@@ -48,6 +46,7 @@ function App() {
           path="subscriptions"
           element={<ProtectRoute Component={Subscriptions} />}
         />
+        <Route path="/auth/callback" element={<OAuthCallback />} />
       </Routes>
     </div>
   );

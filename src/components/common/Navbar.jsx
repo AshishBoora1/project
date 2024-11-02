@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { CrossIcon, Logo, ThreeLineIcon } from "../../components/icons/Icons";
+import {
+  CrossIcon,
+  Logo,
+  ThreeLineIcon,
+  UserIcon,
+} from "../../components/icons/Icons";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useThem } from "../../Context/Context";
 import { toast, ToastContainer } from "react-toastify";
-
 function Navbar({ show }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDropDownOpen, setIsOpenDownOpen] = useState(false);
@@ -16,22 +20,27 @@ function Navbar({ show }) {
 
   const navigate = useNavigate();
   function LogoutBtn() {
-    LogoutUser()
-    .then((result) => {
-      if (result.success) {
-          localStorage.removeItem("token");
-         localStorage.removeItem("userlogin"), setShowBtn(false);
-          navigate("/");
-          toast.success(result.message);
-          setIsOpenDownOpen(false);
-        } else {
-          toast.error(result.message || "Logout failed");
-        }
-      })
-      .catch((error) => {
-        console.error("Logout error:", error);
-        toast.error("An error occurred during Logout.");
-      });
+    // LogoutUser()
+    // .then((result) => {
+    //   if (result.success) {
+    //       localStorage.removeItem("token");
+    //      localStorage.removeItem("userlogin"), setShowBtn(false);
+    //       navigate("/");
+    //       toast.success(result.message);
+    //       setIsOpenDownOpen(false);
+    //     } else {
+    //       toast.error(result.message || "Logout failed");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("Logout error:", error);
+    //     toast.error("An error occurred during Logout.");
+    //   });
+    localStorage.removeItem("token");
+    localStorage.removeItem("userlogin"), setShowBtn(false);
+    navigate("/");
+    toast.success(result.message);
+    setIsOpenDownOpen(false);
   }
 
   return (
@@ -88,23 +97,18 @@ function Navbar({ show }) {
             <div className=" h-[1px] w-full bg-[#00000040] lg:hidden"></div>
             {showbtn ? (
               <>
-                <div className="relative ml-3">
+                <div>
                   <div>
                     <button
                       type="button"
                       onClick={() => setIsOpenDownOpen(!isDropDownOpen)}
-                      className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      className="relative flex rounded-full h-[60px] w-[60px] bg-[#efefef] p-3 "
                       id="user-menu-button"
                       aria-expanded="false"
                       aria-haspopup="true"
                     >
-                      <span className="absolute -inset-1.5"></span>
                       <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
+                      <UserIcon />
                     </button>
                   </div>
 

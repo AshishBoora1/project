@@ -14,7 +14,7 @@ function SignIn() {
     email: "",
     password: "",
   });
-  const { setShowHideContext, LoginUser, setLoading } = useThem();
+  const { setShowHideContext, LoginUser, setLoading, LoginGoogle } = useThem();
   const [showhide, setShowHide] = useState(false);
   function onhandelchange(e) {
     const { name, value } = e.target;
@@ -53,7 +53,7 @@ function SignIn() {
     <>
       <div className=" bg-white md:rounded-[20px] md:border-[2px] border-[#D4D4D4]  px-[34px] md:px-[70px] pb-[35px] pt-10  w-screen md:w-[500px] gap-5 h-screen md:min-h-full   md:h-[570px] h_auto overflow-auto relative flex flex-col justify-evenly md:justify-between items-center">
         <div className=" flex justify-end items-end w-full">
-          <button onClick={() => setShowHideContext(null)}>
+          <button onClick={() => (setShowHideContext(null), toast.dismiss())}>
             <CrossIcon clr={"#ccc"} />
           </button>
         </div>
@@ -99,6 +99,7 @@ function SignIn() {
               <div className=" w-full h-[1px] bg-[#292727] opacity-50"></div>
             </div>
             <button
+              onClick={() => LoginGoogle()}
               type="button"
               className=" bg-[#4285F4] rounded-[7px] p-1 flex items-center w-full gap-5 sm:gap-10"
             >

@@ -61,7 +61,6 @@ export default function MyProfile() {
               Subscriptions
             </NavLink>
             <NavLink
-              onClick={() => UserName()}
               to={"/my-profile"}
               className="text-[15px] lg:text-[22px] font-medium w-full text-center pb-[18px] text-[#B99976] border-b border-[#B99976]"
             >
@@ -76,7 +75,7 @@ export default function MyProfile() {
               onChange={(e) => setName(e.target.value)}
               className="mt-[18px] border w-full border-[#CACACA] rounded-[7px] font-normal placeholder:font-normal text-lg placeholder:text-[#292727] placeholder:text-lg text-[#292727] px-5 py-[10px] outline-none"
               required
-              placeholder="username"
+              placeholder="Enter your username"
               type="text"
               name="text"
             />
@@ -87,7 +86,7 @@ export default function MyProfile() {
                 onChange={(e) => setEmail(e.target.value)}
                 className="mt-[18px] border w-full border-[#CACACA] rounded-[7px] font-normal placeholder:font-normal text-lg placeholder:text-[#292727] placeholder:text-lg text-[#292727] px-5 py-[10px] outline-none"
                 required
-                placeholder="yourmail2024@gmail.com"
+                placeholder="Enter your email"
                 type="email"
                 name="email"
               />

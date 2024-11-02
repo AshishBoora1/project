@@ -218,6 +218,16 @@ export const ContextProvider = ({ children }) => {
     }
   }
 
+  ///////////       Login user Google ////////////
+
+  async function LoginGoogle() {
+    setLoading(true);
+    const loginUrl =
+      "https://gerapps-440892549125.us-central1.run.app/api/auth/google_oauth_login?source_of_registration=main_site";
+    window.location.href = loginUrl;
+    setLoading(false);
+  }
+
   //////////////
 
   return (
@@ -241,6 +251,7 @@ export const ContextProvider = ({ children }) => {
         UserName,
         subscriptions,
         DeleteUser,
+        LoginGoogle,
       }}
     >
       {children}
