@@ -36,6 +36,12 @@ export const ContextProvider = ({ children }) => {
         }
       );
       setLoading(false);
+
+      if (response.status === 200) {
+        setUserEmail(email);
+        return { success: true };
+      }
+
       if (response.status === 404) {
         return { success: false, message: "Account already exists" };
       }
@@ -43,8 +49,6 @@ export const ContextProvider = ({ children }) => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-
-      return { success: true };
     } catch (error) {
       setLoading(false);
       console.error("Signup failed:", error);
@@ -71,6 +75,7 @@ export const ContextProvider = ({ children }) => {
       const data = await response.json();
 
       if (response.status === 200) {
+        setUserEmail(email);
         localStorage.setItem("token", data.user_token);
         return { success: true, message: "Account Successfully logged in" };
       }
@@ -205,7 +210,7 @@ export const ContextProvider = ({ children }) => {
           message: data.data,
         };
       } else {
-          return { success: false, message: "User has not been deleted" };
+        return { success: false, message: "User has not been deleted" };
       }
     } catch (error) {
       console.error("User has not been deleted", error);

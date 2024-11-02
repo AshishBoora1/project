@@ -38,7 +38,7 @@ function App() {
         <Route index element={<Home />} />
         <Route
           path="verify_email"
-          element={<VerifyEmail/>}
+          element={< VerifyEmail />}
         />
         <Route
           path="my-profile"

@@ -9,7 +9,8 @@ function ProtectRoute(props) {
     let token = localStorage.getItem("token");
     if (!login && !token) {
       navigate("/");
-    }
+      }
+      
   }, []);
   return (
     <div>
