@@ -15,6 +15,7 @@ function VerifyEmail() {
           toast.success(result.message, {
             onClose: () => {
               navigate("/");
+              localStorage.setItem("token", token);
               localStorage.setItem("userlogin", true);
             },
             autoClose: 1500,

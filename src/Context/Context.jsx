@@ -71,8 +71,11 @@ export const ContextProvider = ({ children }) => {
         }
       );
       setLoading(false);
+      const data = await response.json();
+      console.log(data);
+      
+      
       if (response.status === 200) {
-        const data = await response.json();
         const loginValue = localStorage.getItem("login");
         if (loginValue) {
           Cookies.set("user_token", loginValue, { path: "/", secure: true });
@@ -123,9 +126,7 @@ export const ContextProvider = ({ children }) => {
 
   //////////////        verify email  /////////////
 
-  async function VerifyEmail(token) {
-    console.log("..............................." , token);
-    
+  async function VerifyEmail(token) {    
     setLoading(true);
     try {
       // localStorage.setItem("token", token);
@@ -150,8 +151,11 @@ export const ContextProvider = ({ children }) => {
     setLoading(true);
     try {
       // localStorage.setItem("token", token);
+      const username = Cookies.get("user_token");
+      console.log(username);
+      
       let response = await fetch(
-        `https://gerapps-440892549125.us-central1.run.app/api/user/get_user_apps`
+        `https://gerapps-440892549125.us-central1.run.app/api/user/get_user_apps?user_token=${username}`
       );
       setLoading(false);
       if (response.status === 200) {
@@ -177,7 +181,7 @@ export const ContextProvider = ({ children }) => {
     try {
       // localStorage.setItem("token", token);
       let response = await fetch(
-        `https://gerapps-440892549125.us-central1.run.app/api/user/change_user_name?new_user_name=sunaina?user_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2VtYWlsIjoiYXNoaXNoYXNoaXNoYm9vcmEwMDFAZ21haWwuY29tIiwiZXhwIjoxNzQxMTgxNTk3fQ.nbGPSJqUaHhbpGcz0X_0Ersv8cPghUGgNNkj-YDimvI`
+        `https://gerapps-440892549125.us-central1.run.app/api/user/change_user_name?new_user_name=sunaina`
       );
       setLoading(false);
       if (response.status === 200) {
@@ -196,6 +200,8 @@ export const ContextProvider = ({ children }) => {
   }
 
   //////////////
+
+  
 
   return (
     <Context.Provider
