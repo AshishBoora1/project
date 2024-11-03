@@ -220,33 +220,33 @@ export const ContextProvider = ({ children }) => {
 
   ///////////       Login user Google ////////////
 
-  async function LoginGoogle() {
-    setLoading(true);
-    const loginUrl = "https://gerapps-440892549125.us-central1.run.app/api/auth/google_oauth_login?source_of_registration=main_site";
-    window.location.href = loginUrl;
-    setLoading(false);
-  }
-
   // async function LoginGoogle() {
   //   setLoading(true);
-  //   try {
-  //     let response = await fetch(
-  //       "https://gerapps-440892549125.us-central1.run.app/api/auth/google_oauth_login?source_of_registration=main_site"
-  //     );
-
-  //     setLoading(false);
-  //     if (response.status === 200) {
-  //       let data = await response.json();
-  //       console.log(data);
-  //     } else {
-  //      console.log("LoginGoogle change failed:" ,error);
-       
-  //     }
-  //   } catch (error) {
-  //     console.error("LoginGoogle change failed:", error);
-  //     setLoading(false);
-  //   }
+  //   const loginUrl = "https://gerapps-440892549125.us-central1.run.app/api/auth/google_oauth_login?source_of_registration=main_site";
+  //   window.location.href = loginUrl;
+  //   setLoading(false);
   // }
+
+  async function LoginGoogle() {
+    setLoading(true);
+    try {
+      let response = await fetch(
+        "https://gerapps-440892549125.us-central1.run.app/api/auth/google_oauth_login?source_of_registration=main_site"
+      );
+
+      setLoading(false);
+      if (response.status === 200) {
+        let data = await response.json();
+        console.log(data);
+      } else {
+       console.log("LoginGoogle change failed:" ,error);
+       
+      }
+    } catch (error) {
+      console.error("LoginGoogle change failed:", error);
+      setLoading(false);
+    }
+  }
 
   /////////////////
   // console.log();
