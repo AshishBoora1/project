@@ -15,9 +15,28 @@ import Auth from "./account/Auth";
 import Loader from "./components/common/Loader";
 import ProtectRoute from "./components/protectroute/ProtectRoute";
 import OAuthCallback from "./pages/OAuthCallback";
-
+import { useNavigate } from "react-router-dom";
 function App() {
   const { showhidecontext, loading } = useThem();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get("code");
+
+    if (code) {
+      // Store the code or process it as needed
+      localStorage.setItem("authCode", code);
+
+      // Clear query parameters from URL without reloading, using replaceState
+      window.history.replaceState(null, "", window.location.pathname);
+
+      // Use a small delay to ensure URL is updated, then navigate
+      setTimeout(() => {
+        navigate("/");
+      }, 100); // 100ms delay to allow URL to clear
+    }
+  }, [navigate]);
   return (
     <div>
       {showhidecontext !== null ? (
@@ -26,9 +45,8 @@ function App() {
         ""
       )}
       <div
-        className={`fixed top-1/2 left-1/2 -translate-x-1/2 duration-700 -translate-y-1/2 z-[100] h-screen w-screen flex justify-center items-center ${
-          showhidecontext === null ? "scale-0" : " scale-100"
-        }`}
+        className={`fixed top-1/2 left-1/2 -translate-x-1/2 duration-700 -translate-y-1/2 z-[100] h-screen w-screen flex justify-center items-center ${showhidecontext === null ? "scale-0" : " scale-100"
+          }`}
       >
         <Auth />
       </div>
