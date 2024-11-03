@@ -35,6 +35,7 @@
 
 // export default OAuthCallback;
 // OAuthCallback.jsx
+// OAuthCallback.jsx
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -43,16 +44,26 @@ function OAuthCallback() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        // Extract the token from the URL
         const urlParams = new URLSearchParams(window.location.search);
         const token = urlParams.get("user_token");
 
         if (token) {
+            // Save token to localStorage
             localStorage.setItem("user_token", token);
+
+            // Clear token from URL to prevent it from showing on screen
+            window.history.replaceState({}, document.title, "/auth/callback");
+
+            // Show success message
             toast.success("Login successful!");
-            navigate("/"); // Redirect to home
+
+            // Redirect to home page
+            navigate("/");
         } else {
+            // If token is missing, show an error message and redirect to sign-in page
             toast.error("Failed to retrieve user token.");
-            navigate("/signin"); // Redirect to sign-in page if token is missing
+            navigate("/signin");
         }
     }, [navigate]);
 
@@ -60,3 +71,4 @@ function OAuthCallback() {
 }
 
 export default OAuthCallback;
+
