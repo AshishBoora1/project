@@ -220,71 +220,13 @@ export const ContextProvider = ({ children }) => {
 
   ///////////       Login user Google ////////////
 
-  // async function LoginGoogle() {
-  //   setLoading(true);
-  //   const loginUrl = "https://gerapps-440892549125.us-central1.run.app/api/auth/google_oauth_login?source_of_registration=main_site";
-  //   window.location.href = loginUrl;
-  //   setLoading(false);
-  // }
-
-  // async function LoginGoogle() {
-  //   setLoading(true);
-  //   try {
-  //     let response = await fetch(
-  //       "https://gerapps-440892549125.us-central1.run.app/api/auth/google_oauth_login?source_of_registration=main_site"
-  //     );
-
-  //     setLoading(false);
-  //     if (response.status === 200) {
-  //       let data = await response.json();
-  //       console.log(data);
-  //     } else {
-  //      console.log("LoginGoogle change failed:" ,error);
-       
-  //     }
-  //   } catch (error) {
-  //     console.error("LoginGoogle change failed:", error);
-  //     setLoading(false);
-  //   }
-  // }
-
   async function LoginGoogle() {
     setLoading(true);
-
-    const loginUrl =
-      "https://gerapps-440892549125.us-central1.run.app/api/auth/google_oauth_login?source_of_registration=main_site";
-
-    try {
-      // Use fetch to get the response from the API
-      const response = await fetch(loginUrl, {
-        method: "GET",
-        redirect: "follow", // This is optional if you want to handle the redirect manually
-      });
-
-      // Check if the response is successful
-      if (response.ok) {
-        const data = await response.json();
-        console.log("API response:", data);
-
-        // If successful and there’s a URL to redirect to, proceed with redirection
-        if (data.redirectUrl) {
-          window.location.href = data.redirectUrl;
-        } else {
-          console.error("No redirect URL provided in response");
-        }
-      } else {
-        console.error(
-          "API response error:",
-          response.status,
-          response.statusText
-        );
-      }
-    } catch (error) {
-      console.error("Error during API request:", error);
-    } finally {
-      setLoading(false);
-    }
+    const loginUrl = "https://gerapps-440892549125.us-central1.run.app/api/auth/google_oauth_login?source_of_registration=main_site";
+    window.location.href = loginUrl;
+    setLoading(false);
   }
+
 
   
 
