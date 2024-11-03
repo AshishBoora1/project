@@ -46,7 +46,7 @@ function App() {
           path="subscriptions"
           element={<ProtectRoute Component={Subscriptions} />}
         />
-        <Route path="/auth/callback" element={<OAuthCallback />} />
+        <Route path="/auth/callback" element={<OAuthCallback />} /> 
       </Routes>
     </div>
   );
