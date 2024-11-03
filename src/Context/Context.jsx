@@ -223,7 +223,7 @@ export const ContextProvider = ({ children }) => {
   async function LoginGoogle() {
     setLoading(true);
     const loginUrl = "https://gerapps-440892549125.us-central1.run.app/api/auth/google_oauth_login?source_of_registration=main_site";
-    window.location.href = loginUrl; 
+    window.location.href = loginUrl;
     setLoading(false);
   }
   //////////////

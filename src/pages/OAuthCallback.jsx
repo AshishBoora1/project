@@ -36,39 +36,49 @@
 // export default OAuthCallback;
 // OAuthCallback.jsx
 // OAuthCallback.jsx
+// OAuthCallback.jsx
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { toast } from "react-toastify";
 
 function OAuthCallback() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Extract the token from the URL
         const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get("user_token");
+        const code = urlParams.get("code");
 
-        if (token) {
-            // Save token to localStorage
-            localStorage.setItem("user_token", token);
+        if (code) {
+            // Send code to backend to obtain token
+            axios
+                .post("https://gerapps-440892549125.us-central1.run.app/api/auth/google_oauth_token_exchange", {
+                    code: code,
+                })
+                .then((response) => {
+                    const { user_token } = response.data;
 
-            // Clear token from URL to prevent it from showing on screen
-            window.history.replaceState({}, document.title, "/auth/callback");
-
-            // Show success message
-            toast.success("Login successful!");
-
-            // Redirect to home page
-            navigate("/");
+                    if (user_token) {
+                        localStorage.setItem("user_token", user_token);
+                        window.history.replaceState({}, document.title, "/"); // Clean up the URL
+                        toast.success("Login successful!");
+                        navigate("/");
+                    } else {
+                        throw new Error("Token not found in response");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error during token exchange:", error);
+                    toast.error("Authentication failed.");
+                    navigate("/signin");
+                });
         } else {
-            // If token is missing, show an error message and redirect to sign-in page
-            toast.error("Failed to retrieve user token.");
+            toast.error("Authorization code not found.");
             navigate("/signin");
         }
     }, [navigate]);
 
-    return <div>Loading...</div>; // Optional loading message while redirecting
+    return <div>Loading...</div>;
 }
 
 export default OAuthCallback;
-
