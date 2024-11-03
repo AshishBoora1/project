@@ -14,29 +14,8 @@ import { useThem } from "./Context/Context";
 import Auth from "./account/Auth";
 import Loader from "./components/common/Loader";
 import ProtectRoute from "./components/protectroute/ProtectRoute";
-import OAuthCallback from "./pages/OAuthCallback";
-import { useNavigate } from "react-router-dom";
 function App() {
   const { showhidecontext, loading } = useThem();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get("code");
-
-    if (code) {
-      // Store the code or process it as needed
-      localStorage.setItem("authCode", code);
-
-      // Clear query parameters from URL without reloading, using replaceState
-      window.history.replaceState(null, "", window.location.pathname);
-
-      // Use a small delay to ensure URL is updated, then navigate
-      setTimeout(() => {
-        navigate("/");
-      }, 100); // 100ms delay to allow URL to clear
-    }
-  }, [navigate]);
   return (
     <div>
       {showhidecontext !== null ? (
@@ -58,13 +37,12 @@ function App() {
         <Route path="verify_email" element={<VerifyEmail />} />
         <Route
           path="my-profile"
-          element={<ProtectRoute Component={MyProfile} />}
+          element={<MyProfile />}
         />
         <Route
           path="subscriptions"
-          element={<ProtectRoute Component={Subscriptions} />}
+          element={<Subscriptions />}
         />
-        {/* <Route path="/auth/callback" element={<OAuthCallback />} /> */}
       </Routes>
     </div>
   );
