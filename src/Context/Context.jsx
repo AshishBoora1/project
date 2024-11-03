@@ -226,7 +226,7 @@ export const ContextProvider = ({ children }) => {
   //   window.location.href = loginUrl;
   //   setLoading(false);
   // }
-  
+
   async function LoginGoogle() {
     setLoading(true);
     try {
@@ -248,7 +248,7 @@ export const ContextProvider = ({ children }) => {
     }
   }
 
-  //////////////
+  /////////////////
 
   return (
     <Context.Provider
