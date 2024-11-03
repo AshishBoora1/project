@@ -169,6 +169,8 @@ export const ContextProvider = ({ children }) => {
     }
   }
 
+  /////  user name change ////
+
   async function UserName(newUserName) {
     // console.log(newUserName);
 
