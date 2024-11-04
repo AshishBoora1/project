@@ -35,14 +35,6 @@ function App() {
               Please check your email to activate your account. If you didn’t
               receive the email, check your spam folder or contact support.
             </p>
-            <div className="flex justify-center">
-              <button
-                onClick={() => setShowPop(false)}
-                className="px-6 py-2 text-white bg-blue-500 rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 transition"
-              >
-                Close
-              </button>
-            </div>
           </div>
         </div>
       )}
