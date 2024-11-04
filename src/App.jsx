@@ -37,8 +37,14 @@ function App() {
       <Routes>
         <Route index element={<Home />} />
         <Route path="verify_email" element={<VerifyEmail />} />
-        <Route path="my-profile" element={<MyProfile />} />
-        <Route path="subscriptions" element={<Subscriptions />} />
+        <Route
+          path="my-profile"
+          element={<ProtectRoute Component={MyProfile} />}
+        />
+        <Route
+          path="subscriptions"
+          element={<ProtectRoute Component={Subscriptions} />}
+        />
         <Route path="/auth/callback" element={<OAuthCallback />} />
       </Routes>
     </div>
