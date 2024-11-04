@@ -25,14 +25,23 @@ function SignUp() {
     if (name === "password" || name === "repassword") {
       setShowMessage("");
     }
-    setUserSignUp({ ...usersignup, [name]: value });
+    setUserSignUp({ ...usersignup, [name]: value.trim() });
   }
 
   const navigate = useNavigate();
   function onhadelsubmit(e) {
     e.preventDefault();
-    if (usersignup.password.length < 8 || usersignup.repassword.length < 8) {
-      setShowMessage("Password must be more than 8 characters!");
+    if (!/\S+@\S+\.\S+/.test(usersignup.email)) {
+      toast.error("Please enter a valid email address.");
+    } else if (
+      usersignup.password.length < 8 ||
+      !/[a-z]/.test(usersignup.password) ||
+      !/[A-Z]/.test(usersignup.password) ||
+      !/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(usersignup.password)
+    ) {
+      setShowMessage(
+        "Password must be 8+ characters with at least one lowercase, one uppercase, and one special character."
+      );
     } else if (usersignup.password !== usersignup.repassword) {
       toast.error("Passwords do not match!");
     } else {
@@ -122,7 +131,7 @@ function SignUp() {
             <button className=" text-white font-normal text-xl bg-[#B99976] rounded-[7px] py-[15px] w-full mt-[25px]">
               Sign Up
             </button>
-            <div className=" h-[10px] mt-1 text-center">
+            <div className=" h-[15px] mt-1.5 text-center">
               {showmessage && (
                 <p className=" text-red-400 font-normal text-xs">
                   {showmessage}

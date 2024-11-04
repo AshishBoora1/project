@@ -18,12 +18,15 @@ function SignIn() {
   const [showhide, setShowHide] = useState(false);
   function onhandelchange(e) {
     const { name, value } = e.target;
-    setUserSignIn({ ...usersignin, [name]: value });
+    setUserSignIn({ ...usersignin, [name]: value.trim() });
   }
 
   const navigate = useNavigate();
   function onhadelsubmit(e) {
     e.preventDefault();
+     if (!/\S+@\S+\.\S+/.test(usersignin.email)) {
+       toast.error("Please enter a valid email address.");
+     }
     LoginUser(usersignin.email, usersignin.password)
       .then((result) => {
         if (result.success) {
