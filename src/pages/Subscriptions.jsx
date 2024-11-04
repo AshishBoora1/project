@@ -10,17 +10,15 @@ import MLSmmary from "../assets/images/png/MLSmmary.png";
 import datanotfound from "../assets/images/png/datanotfound.jpg";
 
 export default function Subscriptions() {
-  const { getsubscriptionsdata, subscriptions, UserName } = useThem();
- useEffect(() => {
-   const login = localStorage.getItem("userlogin");
-   const token = localStorage.getItem("token");
-   if (login && token) {
-     subscriptions();
-   }
- }, []);
+  const { getsubscriptionsdata, subscriptions } = useThem();
+  useEffect(() => {
+    const login = localStorage.getItem("userlogin");
+    const token = localStorage.getItem("token");
+    if (login && token) {
+      subscriptions();
+    }
+  }, []);
 
-
-  
   return (
     <div className="flex h-screen flex-col justify-between gap-10">
       <div>
@@ -29,14 +27,12 @@ export default function Subscriptions() {
           <div className="flex items-center justify-around mt-5  pt-[50px] lg:pt-[100px]">
             <NavLink
               to={"/subscriptions"}
-              onClick={() => subscriptions()}
               className="text-[15px] lg:text-[22px] w-full font-medium pb-[18px] text-center text-[#B99976] border-b border-[#B99976]"
             >
               Subscriptions
             </NavLink>
             <NavLink
               to={"/my-profile"}
-              onClick={() => UserName()}
               className="text-[15px] lg:text-[22px] font-medium w-full text-center pb-[18px]  border-b border-[#CACACA]"
             >
               My Profile
@@ -44,19 +40,12 @@ export default function Subscriptions() {
           </div>
           <div
             className={`flex flex-wrap items-center ${
-              getsubscriptionsdata.length <= 0
+              getsubscriptionsdata === null
                 ? "justify-center"
                 : "justify-between"
-            } mx-[-12px] my-[30px]  gap-5`}
+            } mx-[-12px] my-[30px] gap-5`}
           >
-            {getsubscriptionsdata.length <= 0 ? (
-              <div>
-                {/* <h1 className="text-[15px] lg:text-[28px] w-full font-no text-center text-black">
-                  Data Not Found
-                </h1> */}
-                <img className=" w-full sm:h-[400px] xl:h-[600px]" src={datanotfound} alt="datanotfound" />
-              </div>
-            ) : (
+            {getsubscriptionsdata !== null ? (
               <>
                 {getsubscriptionsdata.map((item, index) => {
                   return (
@@ -102,6 +91,14 @@ export default function Subscriptions() {
                   );
                 })}
               </>
+            ) : (
+              <div>
+                <img
+                  className=" w-full sm:h-[400px] xl:h-[600px]"
+                  src={datanotfound}
+                  alt="datanotfound"
+                />
+              </div>
             )}
           </div>
         </div>

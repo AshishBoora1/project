@@ -1,4 +1,5 @@
 import { createContext, useContext, useRef, useState } from "react";
+import { json } from "react-router-dom";
 export const Context = createContext({
   showsignpop: true,
 });
@@ -149,19 +150,26 @@ export const ContextProvider = ({ children }) => {
     try {
       const token = localStorage.getItem("token");
       let response = await fetch(
-        `https://gerapps-440892549125.us-central1.run.app/api/user/get_user_apps?user_token=${token}`
+        `https://gerapps-440892549125.us-central1.run.app/api/user/get_user_apps`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user_token: token }),
+        }
       );
 
       if (response.status === 200) {
-        let data = await response.json();
+        const data = await response.json();
         let storedata = [];
         for (const key in data) {
           storedata.push(data[key]);
         }
-        setLoading(false);
         setGetSubscriptionsData(storedata);
+        setLoading(false);
       } else {
-        setGetSubscriptionsData([]);
+        setGetSubscriptionsData(null);
         setLoading(false);
       }
     } catch (error) {
@@ -173,13 +181,21 @@ export const ContextProvider = ({ children }) => {
   /////  user name change ////
 
   async function UserName(newUserName) {
-    // console.log(newUserName);
-
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
       let response = await fetch(
-        `https://gerapps-440892549125.us-central1.run.app/api/user/change_user_name?new_user_name=${newUserName}&user_token=${token}`
+        `https://gerapps-440892549125.us-central1.run.app/api/user/change_user_name`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            new_user_name: newUserName,
+            user_token: token,
+          }),
+        }
       );
 
       setLoading(false);

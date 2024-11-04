@@ -55,7 +55,6 @@ export default function MyProfile() {
           <div className="flex items-center justify-around mt-5  pt-[50px] lg:pt-[100px]">
             <NavLink
               to={"/subscriptions"}
-              onClick={() => subscriptions()}
               className="text-[15px] lg:text-[22px] w-full font-medium pb-[18px] text-center  border-b border-[#CACACA] "
             >
               Subscriptions
