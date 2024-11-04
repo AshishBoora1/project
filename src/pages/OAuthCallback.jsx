@@ -9,7 +9,7 @@ function OAuthCallback() {
     if (token) {
       localStorage.setItem("token", token);
       localStorage.setItem("userlogin", true);
-      navigate("/");
+      navigate("/subscriptions");
     }
   }, []);
 

@@ -8,7 +8,7 @@ import {
 import googleicon from "../assets/images/svg/googleicon.svg";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useThem } from "../Context/Context";
-import { toast, ToastContainer } from "react-toastify";
+import { toast, ToastContainer} from "react-toastify";
 function SignIn() {
   const [usersignin, setUserSignIn] = useState({
     email: "",
@@ -30,7 +30,7 @@ function SignIn() {
           setShowHideContext(null);
           toast.success(result.message, {
             onClose: () => {
-              navigate("/");
+              navigate("/subscriptions");
             },
             autoClose: 1500,
           });
@@ -53,7 +53,16 @@ function SignIn() {
     <>
       <div className=" bg-white md:rounded-[20px] md:border-[2px] border-[#D4D4D4]  px-[34px] md:px-[70px] pb-[35px] pt-10  w-screen md:w-[500px] gap-5 h-screen md:min-h-full   md:h-[570px] h_auto overflow-auto relative flex flex-col justify-evenly md:justify-between items-center">
         <div className=" flex justify-end items-end w-full">
-          <button onClick={() => (setShowHideContext(null), toast.dismiss())}>
+          <button
+            onClick={() => (
+              setShowHideContext(null),
+              toast.dismiss(),
+              setUserSignIn({
+                email: "",
+                password: "",
+              })
+            )}
+          >
             <CrossIcon clr={"#ccc"} />
           </button>
         </div>
@@ -128,8 +137,8 @@ function SignIn() {
             </button>
           </div>
         </div>
-        <ToastContainer />
       </div>
+      <ToastContainer />
     </>
   );
 }

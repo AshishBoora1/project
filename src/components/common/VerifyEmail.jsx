@@ -16,7 +16,7 @@ function VerifyEmail() {
         if (result.success) {
           toast.success(result.message, {
             onClose: () => {
-              navigate("/");
+              navigate("/subscriptions");
               localStorage.setItem("token", token);
               localStorage.setItem("userlogin", true);
             },

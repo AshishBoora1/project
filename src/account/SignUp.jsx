@@ -6,7 +6,7 @@ import {
   ShowPassIcon,
 } from "../components/icons/Icons";
 import googleicon from "../assets/images/svg/googleicon.svg";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { useThem } from "../Context/Context";
 function SignUp() {
@@ -19,8 +19,12 @@ function SignUp() {
     useThem();
   const [showhide, setShowHide] = useState(false);
   const [showhiderepassword, setShowHideRePassword] = useState(false);
+  const [showmessage, setShowMessage] = useState("");
   function onhandelchange(e) {
     const { name, value } = e.target;
+    if (name === "password" || name === "repassword") {
+      setShowMessage("");
+    }
     setUserSignUp({ ...usersignup, [name]: value });
   }
 
@@ -28,7 +32,7 @@ function SignUp() {
   function onhadelsubmit(e) {
     e.preventDefault();
     if (usersignup.password.length < 8 || usersignup.repassword.length < 8) {
-      toast.error("Password must be more than 8 characters!");
+      setShowMessage("Password must be more than 8 characters!");
     } else if (usersignup.password !== usersignup.repassword) {
       toast.error("Passwords do not match!");
     } else {
@@ -43,7 +47,7 @@ function SignUp() {
             });
             toast.info("Please check your email and to activate account", {
               onClose: () => {
-                navigate("/");
+                navigate("/subscriptions");
                 setShowHideContext(null);
               },
               autoClose: 1500,
@@ -118,6 +122,13 @@ function SignUp() {
             <button className=" text-white font-normal text-xl bg-[#B99976] rounded-[7px] py-[15px] w-full mt-[25px]">
               Sign Up
             </button>
+            <div className=" h-[10px] mt-1 text-center">
+              {showmessage && (
+                <p className=" text-red-400 font-normal text-xs">
+                  {showmessage}
+                </p>
+              )}
+            </div>
             <div className=" flex gap-2 my-5 items-center">
               <div className=" w-full h-[1px] bg-[#292727] opacity-50"></div>
               <span className=" font-normal text-base text-[#292727] opacity-50">
