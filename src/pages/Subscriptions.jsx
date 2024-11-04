@@ -7,6 +7,7 @@ import { useThem } from "../Context/Context.jsx";
 import SpaceBlack from "../assets/images/png/SpaceBlock.png";
 import TechHistory from "../assets/images/png/TechHistory.png";
 import MLSmmary from "../assets/images/png/MLSmmary.png";
+import datanotfound from "../assets/images/png/datanotfound.jpg";
 
 export default function Subscriptions() {
   const { getsubscriptionsdata, subscriptions, UserName } = useThem();
@@ -17,7 +18,7 @@ export default function Subscriptions() {
      subscriptions();
    }
  }, []);
-console.log(getsubscriptionsdata.length);
+
 
   
   return (
@@ -41,12 +42,19 @@ console.log(getsubscriptionsdata.length);
               My Profile
             </NavLink>
           </div>
-          <div className={`flex flex-wrap items-center ${getsubscriptionsdata.length <= 0 ? "justify-center" : "justify-between"} mx-[-12px] my-[30px] lg:my-[100px] gap-5 lg:flex-nowrap`}>
+          <div
+            className={`flex flex-wrap items-center ${
+              getsubscriptionsdata.length <= 0
+                ? "justify-center"
+                : "justify-between"
+            } mx-[-12px] my-[30px]  gap-5`}
+          >
             {getsubscriptionsdata.length <= 0 ? (
               <div>
-                <h1 className="text-[15px] lg:text-[28px] w-full font-no text-center text-black">
+                {/* <h1 className="text-[15px] lg:text-[28px] w-full font-no text-center text-black">
                   Data Not Found
-                </h1>
+                </h1> */}
+                <img className=" w-full sm:h-[400px] xl:h-[600px]" src={datanotfound} alt="datanotfound" />
               </div>
             ) : (
               <>
@@ -54,7 +62,7 @@ console.log(getsubscriptionsdata.length);
                   return (
                     <div
                       key={index}
-                      className="w-full md:w-[48%] lg:w-4/12 px-3 mx-auto h-full"
+                      className="w-full md:w-[48%] lg:w-[32%] px-3 mx-auto h-full"
                     >
                       <div className="py-[25px] lg:py-[30px] px-[10px] lg:px-[20px]  border border-[#B999764D] shadow-lg text-center rounded-[15px] h-[252px] flex flex-col justify-between">
                         <div>
