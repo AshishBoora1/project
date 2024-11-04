@@ -128,14 +128,14 @@ function SignUp() {
                 {showhiderepassword ? <ShowPassIcon /> : <HidePassIcon />}
               </button>
             </div>
-            <div className=" h-[15px] mt-1.5 text-center">
+            <div className=" h-[15px] mt-2 text-center">
               {showmessage && (
                 <p className=" text-red-400 font-normal text-xs">
                   {showmessage}
                 </p>
               )}
             </div>
-            <button className=" text-white font-normal text-xl bg-[#B99976] rounded-[7px] py-[15px] w-full mt-[25px]">
+            <button className=" text-white font-normal text-xl bg-[#B99976] rounded-[7px] py-[15px] w-full mt-[20px]">
               Sign Up
             </button>
             <div className=" flex gap-2 my-5 items-center">
