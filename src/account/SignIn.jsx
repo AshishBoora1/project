@@ -8,8 +8,9 @@ import {
 import googleicon from "../assets/images/svg/googleicon.svg";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useThem } from "../Context/Context";
-import { toast, ToastContainer} from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 function SignIn() {
+  const [showmessage, setShowMessage] = useState("");
   const [usersignin, setUserSignIn] = useState({
     email: "",
     password: "",
@@ -25,7 +26,7 @@ function SignIn() {
   function onhadelsubmit(e) {
     e.preventDefault();
      if (!/\S+@\S+\.\S+/.test(usersignin.email)) {
-       toast.error("Please enter a valid email address.");
+      setShowMessage("Please enter a valid email address.");
      }
     LoginUser(usersignin.email, usersignin.password)
       .then((result) => {
@@ -43,12 +44,12 @@ function SignIn() {
           });
           localStorage.setItem("userlogin", true);
         } else {
-          toast.error(result.message || "SignIn failed");
+         setShowMessage(result.message || "SignIn failed");
         }
       })
       .catch((error) => {
         console.error("SignIn error:", error);
-        toast.error("An error occurred during signin.");
+        setShowMessage("An error occurred during signin.");
       });
   }
 
@@ -58,8 +59,8 @@ function SignIn() {
         <div className=" flex justify-end items-end w-full">
           <button
             onClick={() => (
-              setShowHideContext(null),
               toast.dismiss(),
+              setShowHideContext(null),
               setUserSignIn({
                 email: "",
                 password: "",
@@ -100,7 +101,14 @@ function SignIn() {
                 {showhide ? <ShowPassIcon /> : <HidePassIcon />}
               </button>
             </div>
-            <button className=" text-white font-normal text-xl bg-[#B99976] rounded-[7px] py-[15px] w-full mt-[25px]">
+            <div className=" h-[10px] mt-2 text-center">
+              {showmessage && (
+                <p className=" text-red-400 font-normal text-xs">
+                  {showmessage}
+                </p>
+              )}
+            </div>
+            <button className=" text-white font-normal text-xl bg-[#B99976] rounded-[7px] py-[15px] w-full mt-[20px]">
               Sign In
             </button>
             <div className=" flex gap-2 my-5 items-center">

@@ -15,8 +15,13 @@ function SignUp() {
     password: "",
     repassword: "",
   });
-  const { setShowHideContext, SignUpUser, setUserEmail, LoginGoogle } =
-    useThem();
+  const {
+    setShowHideContext,
+    SignUpUser,
+    setUserEmail,
+    LoginGoogle,
+    setShowPop,
+  } = useThem();
   const [showhide, setShowHide] = useState(false);
   const [showhiderepassword, setShowHideRePassword] = useState(false);
   const [showmessage, setShowMessage] = useState("");
@@ -32,7 +37,7 @@ function SignUp() {
   function onhadelsubmit(e) {
     e.preventDefault();
     if (!/\S+@\S+\.\S+/.test(usersignup.email)) {
-      toast.error("Please enter a valid email address.");
+      setShowMessage("Please enter a valid email address.");
     } else if (
       usersignup.password.length < 8 ||
       !/[a-z]/.test(usersignup.password) ||
@@ -43,7 +48,7 @@ function SignUp() {
         "Password must be 8+ characters with at least one lowercase, one uppercase, and one special character."
       );
     } else if (usersignup.password !== usersignup.repassword) {
-      toast.error("Passwords do not match!");
+      setShowMessage("Passwords do not match!");
     } else {
       SignUpUser(usersignup.email, usersignup.password)
         .then((result) => {
@@ -54,20 +59,15 @@ function SignUp() {
               password: "",
               repassword: "",
             });
-            toast.info("Please check your email and to activate account", {
-              onClose: () => {
-                navigate("/subscriptions");
-                setShowHideContext(null);
-              },
-              autoClose: 1500,
-            });
+            setShowPop(true);
+            setShowHideContext(null);
           } else {
-            toast.error(result.message || "Signup failed");
+            setShowMessage(result.message || "Signup failed");
           }
         })
         .catch((error) => {
           console.error("Signup error:", error);
-          toast.error("An error occurred during signup.");
+          setShowMessage("An error occurred during signup.");
         });
     }
   }
@@ -76,7 +76,7 @@ function SignUp() {
     <>
       <div className=" bg-white md:rounded-[20px] md:border-[2px] border-[#D4D4D4]  px-[34px] md:px-[70px]  py-10 w-screen md:w-[500px] gap-5 h-screen md:min-h-full  md:h-[570px] h_auto overflow-auto flex flex-col justify-evenly relative md:justify-between items-center">
         <div className=" flex justify-end items-end w-full">
-          <button onClick={() => (setShowHideContext(null), toast.dismiss())}>
+          <button onClick={() => (toast.dismiss(), setShowHideContext(null))}>
             <CrossIcon clr={"#ccc"} />
           </button>
         </div>
@@ -128,9 +128,6 @@ function SignUp() {
                 {showhiderepassword ? <ShowPassIcon /> : <HidePassIcon />}
               </button>
             </div>
-            <button className=" text-white font-normal text-xl bg-[#B99976] rounded-[7px] py-[15px] w-full mt-[25px]">
-              Sign Up
-            </button>
             <div className=" h-[15px] mt-1.5 text-center">
               {showmessage && (
                 <p className=" text-red-400 font-normal text-xs">
@@ -138,6 +135,9 @@ function SignUp() {
                 </p>
               )}
             </div>
+            <button className=" text-white font-normal text-xl bg-[#B99976] rounded-[7px] py-[15px] w-full mt-[25px]">
+              Sign Up
+            </button>
             <div className=" flex gap-2 my-5 items-center">
               <div className=" w-full h-[1px] bg-[#292727] opacity-50"></div>
               <span className=" font-normal text-base text-[#292727] opacity-50">

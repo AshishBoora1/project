@@ -39,14 +39,14 @@ function Navbar({ show }) {
     localStorage.removeItem("token");
     localStorage.removeItem("userlogin"), setShowBtn(false);
     navigate("/");
-    toast.success(result.message);
+    toast.success("Logout successfully");
     setIsOpenDownOpen(false);
   }
 
   return (
     <nav className={show && " border-0 md:border-b border-[#29272726]"}>
       <div
-        className={`container xl:max-w-[1328px] mx-auto px-3 pt-5 pb-4 ${
+        className={`container xl:max-w-[1328px] relative mx-auto px-3 pt-5 pb-4 ${
           !show && " border-0 md:border-b border-[#29272726]"
         }`}
       >

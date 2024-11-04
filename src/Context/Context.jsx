@@ -2,6 +2,18 @@ import { createContext, useContext, useRef, useState } from "react";
 import { json } from "react-router-dom";
 export const Context = createContext({
   showsignpop: true,
+  loading: false,
+  useremail: "",
+  showpop: false,
+  showhidecontext: null,
+  getsubscriptionsdata: [],
+  scrollToNextSection: () => {},
+  SignUpUser: () => {},
+  LogoutUser: () => {},
+  VerifyEmail: () => {},
+  DeleteUser: () => {},
+  UserName: () => {},
+  LoginGoogle: () => {},
 });
 
 export const ContextProvider = ({ children }) => {
@@ -9,6 +21,7 @@ export const ContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [useremail, setUserEmail] = useState("");
   const [showsignpop, setShowSignPop] = useState(false);
+  const [showpop, setShowPop] = useState(false);
   const [showhidecontext, setShowHideContext] = useState(null);
   const [getsubscriptionsdata, setGetSubscriptionsData] = useState([]);
   const scrollToNextSection = (index) => {
@@ -258,6 +271,8 @@ export const ContextProvider = ({ children }) => {
         setShowHideContext,
         SignUpUser,
         LoginUser,
+        setShowPop,
+        showpop,
         LogoutUser,
         loading,
         setLoading,
