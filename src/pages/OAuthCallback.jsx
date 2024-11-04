@@ -11,7 +11,6 @@ function OAuthCallback() {
       localStorage.setItem("userlogin", true);
       navigate("/");
     }
-    console.log("assssssssssss");
   }, []);
 
   return <div className=" flex justify-center items-center h-screen text-3xl">Loading...</div>;

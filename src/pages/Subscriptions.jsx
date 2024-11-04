@@ -17,7 +17,9 @@ export default function Subscriptions() {
      subscriptions();
    }
  }, []);
+console.log(getsubscriptionsdata.length);
 
+  
   return (
     <div className="flex h-screen flex-col justify-between gap-10">
       <div>
@@ -39,50 +41,60 @@ export default function Subscriptions() {
               My Profile
             </NavLink>
           </div>
-          <div className="flex flex-wrap items-center justify-between mx-[-12px] my-[30px] lg:my-[100px] gap-5 lg:flex-nowrap">
-            {getsubscriptionsdata.map((item, index) => {
-              return (
-                <div
-                  key={index}
-                  className="w-full md:w-[48%] lg:w-4/12 px-3 mx-auto h-full"
-                >
-                  <div className="py-[25px] lg:py-[30px] px-[10px] lg:px-[20px]  border border-[#B999764D] shadow-lg text-center rounded-[15px] h-[252px] flex flex-col justify-between">
-                    <div>
-                      <img
-                        className="mx-auto"
-                        src={
-                          index === 0
-                            ? SpaceBlack
-                            : index === 1
-                            ? TechHistory
-                            : MLSmmary
-                        }
-                      />
-                      <p className="text-xl lg:text-[22px] font-medium mt-3 lg:mt-3">
-                        {item.public_name}
-                      </p>
-                      <div className="flex items-center lg:flex-col xl:flex-row text-center justify-center mt-3 lg:mt-5">
-                        <p className="text-[#B99976] text-base xl:text-lg me-1">
-                          status
-                        </p>
-                        <p className="text-base lg:text-lg text-center text-nowrap">
-                          {item.status}
-                        </p>
+          <div className={`flex flex-wrap items-center ${getsubscriptionsdata.length <= 0 ? "justify-center" : "justify-between"} mx-[-12px] my-[30px] lg:my-[100px] gap-5 lg:flex-nowrap`}>
+            {getsubscriptionsdata.length <= 0 ? (
+              <div>
+                <h1 className="text-[15px] lg:text-[28px] w-full font-no text-center text-black">
+                  Data Not Found
+                </h1>
+              </div>
+            ) : (
+              <>
+                {getsubscriptionsdata.map((item, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="w-full md:w-[48%] lg:w-4/12 px-3 mx-auto h-full"
+                    >
+                      <div className="py-[25px] lg:py-[30px] px-[10px] lg:px-[20px]  border border-[#B999764D] shadow-lg text-center rounded-[15px] h-[252px] flex flex-col justify-between">
+                        <div>
+                          <img
+                            className="mx-auto"
+                            src={
+                              index === 0
+                                ? SpaceBlack
+                                : index === 1
+                                ? TechHistory
+                                : MLSmmary
+                            }
+                          />
+                          <p className="text-xl lg:text-[22px] font-medium mt-3 lg:mt-3">
+                            {item.public_name}
+                          </p>
+                          <div className="flex items-center lg:flex-col xl:flex-row text-center justify-center mt-3 lg:mt-5">
+                            <p className="text-[#B99976] text-base xl:text-lg me-1">
+                              status
+                            </p>
+                            <p className="text-base lg:text-lg text-center text-nowrap">
+                              {item.status}
+                            </p>
+                          </div>
+                        </div>
+                        <div>
+                          <NavLink
+                            target="_blank"
+                            className=" text-sm text-black after:contents-[] after:absolute after:bottom-0 after:left-0 after:bg-black after:h-[1px] after:w-full relative"
+                            to={item.link.android}
+                          >
+                            Android store
+                          </NavLink>
+                        </div>
                       </div>
                     </div>
-                    <div>
-                      <NavLink
-                        target="_blank"
-                        className=" text-sm text-black after:contents-[] after:absolute after:bottom-0 after:left-0 after:bg-black after:h-[1px] after:w-full relative"
-                        to={item.link.android}
-                      >
-                        Android store
-                      </NavLink>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+                  );
+                })}
+              </>
+            )}
           </div>
         </div>
       </div>

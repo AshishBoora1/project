@@ -102,7 +102,7 @@ function Navbar({ show }) {
                     <button
                       type="button"
                       onClick={() => setIsOpenDownOpen(!isDropDownOpen)}
-                      className="relative flex rounded-full h-[60px] w-[60px] bg-[#efefef] p-3 "
+                      className="relative flex rounded-full h-[40px] w-[40px] bg-[#efefef] p-3 "
                       id="user-menu-button"
                       aria-expanded="false"
                       aria-haspopup="true"
