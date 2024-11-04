@@ -169,7 +169,7 @@ export const ContextProvider = ({ children }) => {
         setGetSubscriptionsData(storedata);
         setLoading(false);
       } else {
-        setGetSubscriptionsData(null);
+        setGetSubscriptionsData([]);
         setLoading(false);
       }
     } catch (error) {
