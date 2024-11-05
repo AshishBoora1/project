@@ -14,6 +14,7 @@ export const Context = createContext({
   DeleteUser: () => {},
   UserName: () => {},
   LoginGoogle: () => {},
+  UserProfile: () => {},
 });
 
 export const ContextProvider = ({ children }) => {
@@ -95,20 +96,24 @@ export const ContextProvider = ({ children }) => {
 
       // Handle specific status codes
       if (response.status === 404) {
-        return { success: false, message: "Please check your email or password." };
+        return {
+          success: false,
+          message: "Please check your email or password.",
+        };
       }
 
       // Generic error for other non-200 status codes
       return { success: false, message: `Login failed` };
-
     } catch (error) {
       console.error("Login failed:", error);
-      return { success: false, message: "An error occurred. Please try again later." };
+      return {
+        success: false,
+        message: "An error occurred. Please try again later.",
+      };
     } finally {
       setLoading(false); // Ensure loading state is reset
     }
   }
-
 
   ///////////////       logoutUser   ////////////
 
@@ -263,6 +268,36 @@ export const ContextProvider = ({ children }) => {
     setLoading(false);
   }
 
+  //////////////     user profile  ///////////////
+
+  async function UserProfile() {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      let response = await fetch(
+        `https://gerapps-440892549125.us-central1.run.app/api/user/get_profile_data`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user_token: token }),
+        }
+      );
+
+      if (response.status === 200) {
+        const data = await response.json();
+        setLoading(false);
+        return data
+      } else {
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error("UserProfile failed:", error);
+      setLoading(false);
+    }
+  }
+
   return (
     <Context.Provider
       value={{
@@ -287,6 +322,7 @@ export const ContextProvider = ({ children }) => {
         subscriptions,
         DeleteUser,
         LoginGoogle,
+        UserProfile,
       }}
     >
       {children}

@@ -1,24 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/common/Navbar.jsx";
 import { NavLink, useNavigate } from "react-router-dom";
 import { EmailIcon } from "../components/icons/Icons";
 import { useThem } from "../Context/Context.jsx";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 export default function MyProfile() {
+  const { UserName, DeleteUser, UserProfile, userprofiledata } = useThem();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  const { getsubscriptionsdata, subscriptions, UserName, DeleteUser } =
-    useThem();
   function onhadelsubmit(e) {
     e.preventDefault();
     UserName(name)
       .then((result) => {
         if (result.success) {
           toast.success(result.message);
-          setEmail("");
-          setName("");
         } else {
           toast.error(result.message || "UserName Change failed");
         }
@@ -28,6 +25,14 @@ export default function MyProfile() {
         toast.error("An error occurred during UserName.");
       });
   }
+
+  useEffect(() => {
+   UserProfile().then((data) => {
+     setName(data.user_name);
+     setEmail(data.user_email);
+   });
+  }, []);
+
   const navigate = useNavigate();
   function Onhandeldelete() {
     DeleteUser()
