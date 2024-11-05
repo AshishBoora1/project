@@ -63,8 +63,8 @@ export default function Subscriptions() {
                         {item.public_name}
                       </p>
                       <div className="flex items-center lg:flex-col xl:flex-row text-center justify-center mt-3 lg:mt-5">
-                        <p className="text-green-400 text-base  sm:text-lg me-1">
-                          Try this app
+                        <p className="text-[#B99976] text-base  sm:text-lg me-1">
+                          Try this app:
                         </p>
                       </div>
                     </div>
