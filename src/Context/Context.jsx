@@ -85,27 +85,30 @@ export const ContextProvider = ({ children }) => {
           body: JSON.stringify({ email, password }),
         }
       );
-      setLoading(false);
       const data = await response.json();
 
-      if (response.status === 200) {
+      if (response.ok) {
         setUserEmail(email);
         localStorage.setItem("token", data.user_token);
         return { success: true, message: "Account Successfully logged in" };
       }
 
+      // Handle specific status codes
       if (response.status === 404) {
-        return { success: false, message: "Something Went Wrong" };
+        return { success: false, message: "Please check your email or password." };
       }
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+      // Generic error for other non-200 status codes
+      return { success: false, message: `Login failed` };
+
     } catch (error) {
-      setLoading(false);
-      console.error("SignIn failed:", error);
+      console.error("Login failed:", error);
+      return { success: false, message: "An error occurred. Please try again later." };
+    } finally {
+      setLoading(false); // Ensure loading state is reset
     }
   }
+
 
   ///////////////       logoutUser   ////////////
 

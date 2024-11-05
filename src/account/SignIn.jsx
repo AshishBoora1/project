@@ -31,6 +31,7 @@ function SignIn() {
     // /////////////////
     LoginUser(usersignin.email, usersignin.password)
       .then((result) => {
+        console.log(result)
         if (result.success) {
           setShowHideContext(null);
           toast.success(result.message, {
