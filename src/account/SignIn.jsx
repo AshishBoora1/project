@@ -27,7 +27,8 @@ function SignIn() {
     e.preventDefault();
      if (!/\S+@\S+\.\S+/.test(usersignin.email)) {
       setShowMessage("Please enter a valid email address.");
-     }
+    }
+    // /////////////////
     LoginUser(usersignin.email, usersignin.password)
       .then((result) => {
         if (result.success) {
