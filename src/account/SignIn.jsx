@@ -8,7 +8,7 @@ import {
 import googleicon from "../assets/images/svg/googleicon.svg";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useThem } from "../Context/Context";
-import { toast, ToastContainer} from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 function SignIn() {
   const [usersignin, setUserSignIn] = useState({
     email: "",
@@ -26,6 +26,7 @@ function SignIn() {
     e.preventDefault();
     LoginUser(usersignin.email, usersignin.password)
       .then((result) => {
+        console.log(result)
         if (result.success) {
           setShowHideContext(null);
           toast.success(result.message, {
