@@ -15,10 +15,30 @@ import Auth from "./account/Auth";
 import Loader from "./components/common/Loader";
 import ProtectRoute from "./components/protectroute/ProtectRoute";
 import OAuthCallback from "./pages/OAuthCallback";
+import { CrossIcon } from "./components/icons/Icons";
 function App() {
-  const { showhidecontext, loading } = useThem();
+  const { showhidecontext, loading, showpop, setShowPop } = useThem();
+  if (showpop) {
+    setTimeout(() => {
+      setShowPop(false);
+    }, 3000);
+  }
   return (
     <div>
+      {showpop && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
+          <div className="bg-white max-w-md w-full p-8 rounded-lg shadow-2xl transform transition-all duration-300 ease-out scale-105">
+            <h2 className="text-2xl font-semibold text-blue-600 mb-4 text-center">
+              Activation Required
+            </h2>
+            <p className="text-gray-700 text-center mb-6">
+              Please check your email to activate your account. If you didn’t
+              receive the email, check your spam folder or contact support.
+            </p>
+          </div>
+        </div>
+      )}
+
       {showhidecontext !== null && (
         <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-md z-[80]"></div>
       )}

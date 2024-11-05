@@ -39,14 +39,14 @@ function Navbar({ show }) {
     localStorage.removeItem("token");
     localStorage.removeItem("userlogin"), setShowBtn(false);
     navigate("/");
-    toast.success(result.message);
+    toast.success("Logout successfully");
     setIsOpenDownOpen(false);
   }
 
   return (
     <nav className={show && " border-0 md:border-b border-[#29272726]"}>
       <div
-        className={`container xl:max-w-[1328px] mx-auto px-3 pt-5 pb-4 ${
+        className={`container xl:max-w-[1328px] relative mx-auto px-3 pt-5 pb-4 ${
           !show && " border-0 md:border-b border-[#29272726]"
         }`}
       >
@@ -114,7 +114,7 @@ function Navbar({ show }) {
 
                   {isDropDownOpen && (
                     <div
-                      className="absolute right-1/4 lg:right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                      className="absolute right-1/4 lg:right-0 py-3 z-10 mt-2 w-48 origin-top-right rounded-md bg-white  shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                       role="menu"
                       aria-orientation="vertical"
                       aria-labelledby="user-menu-button"
@@ -122,7 +122,7 @@ function Navbar({ show }) {
                     >
                       <NavLink
                         to="/my-profile"
-                        className="font-normal block px-4 py-2 text-sm text-gray-700"
+                        className="font-normal block px-4 text-sm text-gray-700"
                         role="menuitem"
                         tabIndex="-1"
                         onClick={() => setIsOpenDownOpen(false)}
@@ -131,7 +131,7 @@ function Navbar({ show }) {
                         Your Profile
                       </NavLink>
                       <button
-                        className="font-normal w-full text-start px-4 py-2 text-sm text-gray-700"
+                        className="font-normal w-full text-start px-4  text-sm text-gray-700 mt-2"
                         onClick={LogoutBtn}
                       >
                         Logout
