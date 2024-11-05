@@ -63,7 +63,7 @@ export default function Subscriptions() {
                         {item.public_name}
                       </p>
                       <div className="flex items-center lg:flex-col xl:flex-row text-center justify-center mt-3 lg:mt-5">
-                        <p className="text-green-400 text-base xl:text-lg me-1">
+                        <p className="text-green-400 text-base  sm:text-lg me-1">
                           Try this app
                         </p>
                       </div>
@@ -71,7 +71,7 @@ export default function Subscriptions() {
                     <div>
                       <NavLink
                         target="_blank"
-                        className=" text-sm text-black after:contents-[] after:absolute after:bottom-0 after:left-0 after:bg-black after:h-[1px] after:w-full relative"
+                        className=" text-base text-black after:contents-[] sm:text-base after:absolute after:bottom-0 after:left-0 after:bg-black after:h-[1px] after:w-full relative"
                         to={item.link.android}
                       >
                         Android store
