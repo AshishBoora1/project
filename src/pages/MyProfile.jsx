@@ -91,6 +91,7 @@ export default function MyProfile() {
                 className="mt-[18px] border w-full border-[#CACACA] rounded-[7px] font-normal placeholder:font-normal text-lg placeholder:text-[#292727] placeholder:text-lg text-[#292727] px-5 py-[10px] outline-none"
                 required
                 placeholder="Enter your email"
+                 autoComplete="current-password"
                 type="email"
                 name="email"
               />

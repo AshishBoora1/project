@@ -93,6 +93,7 @@ function SignUp() {
               required
               onChange={onhandelchange}
               value={usersignup.email}
+              autoComplete="current-password"
               placeholder="Email"
               type="email"
               name="email"
@@ -104,6 +105,7 @@ function SignUp() {
                 onChange={onhandelchange}
                 value={usersignup.password}
                 placeholder="Password"
+                autoComplete="current-password"
                 type={!showhide ? "password" : "text"}
                 name="password"
               />
@@ -118,6 +120,7 @@ function SignUp() {
                 onChange={onhandelchange}
                 value={usersignup.repassword}
                 placeholder="Check Password"
+                autoComplete="current-password"
                 type={!showhiderepassword ? "password" : "text"}
                 name="repassword"
               />

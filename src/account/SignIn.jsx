@@ -86,6 +86,7 @@ function SignIn() {
               onChange={onhandelchange}
               value={usersignin.email}
               placeholder="Email"
+               autoComplete="current-password"
               type="email"
               name="email"
             />
@@ -95,6 +96,7 @@ function SignIn() {
                 required
                 onChange={onhandelchange}
                 value={usersignin.password}
+                autoComplete="current-password"
                 placeholder="Password"
                 type={!showhide ? "password" : "text"}
                 name="password"
