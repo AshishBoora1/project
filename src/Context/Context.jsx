@@ -1,5 +1,5 @@
 import { createContext, useContext, useRef, useState } from "react";
-import { json } from "react-router-dom";
+const api = import.meta.env.VITE_API_URL;
 export const Context = createContext({
   showsignpop: true,
   loading: false,
@@ -37,7 +37,7 @@ export const ContextProvider = ({ children }) => {
     setLoading(true);
     try {
       const response = await fetch(
-        "https://gerapps-440892549125.us-central1.run.app/api/auth/email_sign_up",
+        `${api}/email_sign_up`,
         {
           method: "POST",
           headers: {
@@ -77,7 +77,7 @@ export const ContextProvider = ({ children }) => {
     setLoading(true);
     try {
       let response = await fetch(
-        "https://gerapps-440892549125.us-central1.run.app/api/auth/email_login",
+        `${api}/email_login`,
         {
           method: "POST",
           headers: {
@@ -121,7 +121,7 @@ export const ContextProvider = ({ children }) => {
     setLoading(true);
     try {
       let response = await fetch(
-        "https://gerapps-440892549125.us-central1.run.app/api/auth/logout",
+       `${api}/logout`,
         {
           method: "POST",
           headers: {
@@ -149,7 +149,7 @@ export const ContextProvider = ({ children }) => {
     setLoading(true);
     try {
       let response = await fetch(
-        `https://gerapps-440892549125.us-central1.run.app/api/auth/verify_email?token=${token}`
+        `${api}/verify_email?token=${token}`
       );
       setLoading(false);
       if (response.status === 200) {
@@ -171,7 +171,7 @@ export const ContextProvider = ({ children }) => {
     try {
       const token = localStorage.getItem("token");
       let response = await fetch(
-        `https://gerapps-440892549125.us-central1.run.app/api/user/get_user_apps`,
+        `${api}/user/get_user_apps`,
         {
           method: "POST",
           headers: {
@@ -206,7 +206,7 @@ export const ContextProvider = ({ children }) => {
     try {
       const token = localStorage.getItem("token");
       let response = await fetch(
-        `https://gerapps-440892549125.us-central1.run.app/api/user/change_user_name`,
+        `${api}/user/change_user_name`,
         {
           method: "POST",
           headers: {
@@ -239,7 +239,7 @@ export const ContextProvider = ({ children }) => {
     try {
       const token = localStorage.getItem("token");
       let response = await fetch(
-        `https://gerapps-440892549125.us-central1.run.app/api/user/delete_user?user_token=${token}`
+        `${api}/user/delete_user?user_token=${token}`
       );
 
       setLoading(false);
@@ -263,7 +263,7 @@ export const ContextProvider = ({ children }) => {
   async function LoginGoogle() {
     setLoading(true);
     const loginUrl =
-      "https://gerapps-440892549125.us-central1.run.app/api/auth/google_oauth_login?source_of_registration=main_site";
+      `${api}/google_oauth_login?source_of_registration=main_site`;
     window.location.href = loginUrl;
     setLoading(false);
   }
@@ -275,7 +275,7 @@ export const ContextProvider = ({ children }) => {
     try {
       const token = localStorage.getItem("token");
       let response = await fetch(
-        `https://gerapps-440892549125.us-central1.run.app/api/user/get_profile_data`,
+        `${api}/user/get_profile_data`,
         {
           method: "POST",
           headers: {
