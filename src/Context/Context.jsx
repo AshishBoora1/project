@@ -226,7 +226,7 @@ export const ContextProvider = ({ children }) => {
     try {
       const token = localStorage.getItem("token");
       let response = await fetch(
-        `${api}/api/user/change_user_name?user_token=${token}`
+        `${api}/api/user/delete_user?user_token=${token}`
       );
 
       setLoading(false);
