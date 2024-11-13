@@ -35,21 +35,19 @@ export const ContextProvider = ({ children }) => {
 
   async function SignUpUser(email, password) {
     setLoading(true);
+    
     try {
-      const response = await fetch(
-        `${api}email_sign_up`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            password,
-            source_of_registration: "main_site",
-          }),
-        }
-      );
+      const response = await fetch(`${api}/api/auth/email_sign_up`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+          source_of_registration: "main_site",
+        }),
+      });
       setLoading(false);
 
       if (response.status === 200) {
@@ -76,16 +74,13 @@ export const ContextProvider = ({ children }) => {
   async function LoginUser(email, password) {
     setLoading(true);
     try {
-      let response = await fetch(
-        `${api}email_login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      let response = await fetch(`${api}/api/auth/email_login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
       const data = await response.json();
 
       if (response.ok) {
@@ -148,9 +143,7 @@ export const ContextProvider = ({ children }) => {
   async function VerifyEmail(token) {
     setLoading(true);
     try {
-      let response = await fetch(
-        `${api}verify_email?token=${token}`
-      );
+      let response = await fetch(`${api}/api/auth/verify_email?token=${token}`);
       setLoading(false);
       if (response.status === 200) {
         localStorage.setItem("token", token);
@@ -170,16 +163,13 @@ export const ContextProvider = ({ children }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      let response = await fetch(
-        `${api}user/get_user_apps`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ user_token: token }),
-        }
-      );
+      let response = await fetch(`${api}/api/auth/verify_email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user_token: token }),
+      });
 
       if (response.status === 200) {
         const data = await response.json();
@@ -205,19 +195,16 @@ export const ContextProvider = ({ children }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      let response = await fetch(
-        `${api}user/change_user_name`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            new_user_name: newUserName,
-            user_token: token,
-          }),
-        }
-      );
+      let response = await fetch(`${api}/api/user/change_user_name`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          new_user_name: newUserName,
+          user_token: token,
+        }),
+      });
 
       setLoading(false);
       if (response.status === 200) {
@@ -239,7 +226,7 @@ export const ContextProvider = ({ children }) => {
     try {
       const token = localStorage.getItem("token");
       let response = await fetch(
-        `${api}user/delete_user?user_token=${token}`
+        `${api}/api/user/change_user_name?user_token=${token}`
       );
 
       setLoading(false);
@@ -262,7 +249,7 @@ export const ContextProvider = ({ children }) => {
 
   async function LoginGoogle() {
     setLoading(true);
-    const loginUrl = `${api}auth/google_oauth_login?source_of_registration=main_site`;
+    const loginUrl = `${api}/api/auth/google_oauth_login?source_of_registration=main_site`;
     window.location.href = loginUrl;
     setLoading(false);
   }
@@ -273,16 +260,13 @@ export const ContextProvider = ({ children }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      let response = await fetch(
-        `${api}user/get_profile_data`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ user_token: token }),
-        }
-      );
+      let response = await fetch(`${api}/api/user/get_profile_data`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user_token: token }),
+      });
 
       if (response.status === 200) {
         const data = await response.json();
