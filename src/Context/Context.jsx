@@ -35,7 +35,6 @@ export const ContextProvider = ({ children }) => {
 
   async function SignUpUser(email, password) {
     setLoading(true);
-    
     try {
       const response = await fetch(`${api}/api/auth/email_sign_up`, {
         method: "POST",
