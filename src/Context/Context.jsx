@@ -163,7 +163,7 @@ export const ContextProvider = ({ children }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      let response = await fetch(`${api}/api/auth/verify_email`, {
+      let response = await fetch(`${api}/api/user/get_user_apps`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
