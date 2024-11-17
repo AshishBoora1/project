@@ -18,14 +18,14 @@ import OAuthCallback from "./pages/OAuthCallback";
 import { CrossIcon } from "./components/icons/Icons";
 function App() {
   const { showhidecontext, loading, showpop, setShowPop } = useThem();
-  if (showpop) {
-    setTimeout(() => {
-      setShowPop(false);
-    }, 3000);
-  }
+  // if (showpop) {
+  //   setTimeout(() => {
+  //     setShowPop(false);
+  //   }, 3000);
+  // }
   return (
     <div>
-      {showpop && (
+      {/* {showpop && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
           <div className="bg-white max-w-md w-full p-8 rounded-lg shadow-2xl transform transition-all duration-300 ease-out scale-105">
             <h2 className="text-2xl font-semibold text-blue-600 mb-4 text-center">
@@ -37,7 +37,7 @@ function App() {
             </p>
           </div>
         </div>
-      )}
+      )} */}
 
       {showhidecontext !== null && (
         <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-md z-[80]"></div>
@@ -54,8 +54,8 @@ function App() {
       {loading && <Loader />}
       {/* )} */}
       <Routes>
-        <Route index element={<Home />} />
         <Route path="verify_email" element={<VerifyEmail />} />
+        <Route index element={<Home />} />
         <Route
           path="my-profile"
           element={<ProtectRoute Component={MyProfile} />}

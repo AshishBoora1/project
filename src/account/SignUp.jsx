@@ -15,6 +15,8 @@ function SignUp() {
     password: "",
     repassword: "",
   });
+
+  const [Infomsg, setInfomsg] = useState(null);
   const {
     setShowHideContext,
     SignUpUser,
@@ -59,10 +61,13 @@ function SignUp() {
               password: "",
               repassword: "",
             });
-            setShowPop(true);
-            setShowHideContext(null);
+            // setShowPop(true);
+            setInfomsg(result.message);
+            setTimeout(() => {
+              setShowHideContext(null);
+            }, 3000);
           } else {
-            setShowMessage(result.message || "Signup failed");
+            setShowMessage(result.message);
           }
         })
         .catch((error) => {
@@ -75,6 +80,11 @@ function SignUp() {
   return (
     <>
       <div className=" bg-white md:rounded-[20px] md:border-[2px] border-[#D4D4D4]  px-[34px] md:px-[70px]  py-10 w-screen md:w-[500px] gap-5 h-screen md:min-h-full  md:h-[570px] h_auto overflow-auto flex flex-col justify-evenly relative md:justify-between items-center">
+        {Infomsg && (
+          <div className=" h-[15px] mt-2 text-center">
+            <p className=" text-green-400 font-normal text-xs">{Infomsg}</p>
+          </div>
+        )}
         <div className=" flex justify-end items-end w-full">
           <button onClick={() => (toast.dismiss(), setShowHideContext(null))}>
             <CrossIcon clr={"#ccc"} />

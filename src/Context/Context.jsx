@@ -47,15 +47,17 @@ export const ContextProvider = ({ children }) => {
           source_of_registration: "main_site",
         }),
       });
-      setLoading(false);
 
+      setLoading(false);
+      let data = await response.json();
       if (response.status === 200) {
         setUserEmail(email);
-        return { success: true };
+        return { success: true, message: data.msg };
       }
 
       if (response.status === 404) {
-        return { success: false, message: "Account already exists" };
+        console.log(response.status);
+        return { success: false, message: data.detail };
       }
 
       if (!response.ok) {
@@ -81,18 +83,17 @@ export const ContextProvider = ({ children }) => {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
-
       if (response.ok) {
         setUserEmail(email);
         localStorage.setItem("token", data.user_token);
-        return { success: true, message: "Account Successfully logged in" };
+        return { success: true, message: data.msg };
       }
 
       // Handle specific status codes
       if (response.status === 404) {
         return {
           success: false,
-          message: "Please check your email or password.",
+          message: data.detail,
         };
       }
 
@@ -110,19 +111,16 @@ export const ContextProvider = ({ children }) => {
   }
 
   ///////////////       logoutUser   ////////////y
- 
+
   async function LogoutUser() {
     setLoading(true);
     try {
-      let response = await fetch(
-       `${api}logout`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      let response = await fetch(`${api}logout`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       setLoading(false);
       if (response.status === 200) {
         return { success: true, message: "Logout successfully" };
@@ -144,13 +142,15 @@ export const ContextProvider = ({ children }) => {
     try {
       let response = await fetch(`${api}/api/auth/verify_email?token=${token}`);
       setLoading(false);
+           const data = await response.json();
       if (response.status === 200) {
         localStorage.setItem("token", token);
-        return { success: true, message: "Login successfully" };
+
+        return { success: true, message: data.msg };
       }
 
       if (response.status === 404) {
-        return { success: false, message: "VerifyEmail Failed" };
+        return { success: false, message: data.detail };
       }
     } catch (error) {
       console.error("VerifyEmail failed:", error);
@@ -206,11 +206,12 @@ export const ContextProvider = ({ children }) => {
       });
 
       setLoading(false);
+           const data = await response.json();
       if (response.status === 200) {
         let data = await response.json();
         return { success: true, message: data[0] };
       } else {
-        return { success: false, message: "UserName change failed" };
+        return { success: false, message: data.detail };
       }
     } catch (error) {
       console.error("UserName change failed:", error);
@@ -227,7 +228,7 @@ export const ContextProvider = ({ children }) => {
       let response = await fetch(
         `${api}/api/user/delete_user?user_token=${token}`
       );
-
+     const data = await response.json();
       setLoading(false);
       if (response.status === 200) {
         let data = await response.json();
@@ -236,7 +237,7 @@ export const ContextProvider = ({ children }) => {
           message: data.data,
         };
       } else {
-        return { success: false, message: "User has not been deleted" };
+        return { success: false, message: data.detail };
       }
     } catch (error) {
       console.error("User has not been deleted", error);
@@ -270,7 +271,7 @@ export const ContextProvider = ({ children }) => {
       if (response.status === 200) {
         const data = await response.json();
         setLoading(false);
-        return data
+        return data;
       } else {
         setLoading(false);
       }
