@@ -225,9 +225,15 @@ export const ContextProvider = ({ children }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      let response = await fetch(
-        `${api}/api/user/delete_user?user_token=${token}`
-      );
+      let response = await fetch(`${api}/api/user/delete_user`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_token: token,
+        }),
+      });
      const data = await response.json();
       setLoading(false);
       if (response.status === 200) {

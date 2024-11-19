@@ -11,7 +11,7 @@ import imgleft from "../assets/images/png/imgleft.png";
 import rightimg from "../assets/images/png/rightimg.png";
 import { ArrowIcon, EmailIcon, LineIcon } from "../components/icons/Icons";
 import Navbar from "../components/common/Navbar.jsx";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useThem } from "../Context/Context.jsx";
 function PrevArrow(props) {
   const { onClick } = props;
@@ -93,7 +93,9 @@ const navigate = useNavigate();
               <div className="mt-5 md:mt-[35px]">
                 <button
                   onClick={() =>
-                    isLoggedIn ? navigate("/subscriptions") : setShowHideContext(true)
+                    isLoggedIn
+                      ? navigate("/subscriptions")
+                      : setShowHideContext(true)
                   }
                   className="text-base  xl:text-xl font-normal text-white bg-[#B99976] rounded-[5px] py-[10px]  px-5"
                 >
@@ -147,6 +149,18 @@ const navigate = useNavigate();
                   <h2 className=" font-semibold text-[30px] sm:text-[35px] xl:text-[45px] ff_promt text-[#B99976]">
                     Tech History
                   </h2>
+                  <div>
+                    <Link
+                      className=" font-normal text-[24px] text-black"
+                      to="https://play.google.com/store/apps/details?id=com.salad_apps.tech_history
+"
+                    >
+                      Try now:{" "}
+                      <span className="text-[#B99976] relative after:contents-[] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#B99976]">
+                        Google play
+                      </span>
+                    </Link>
+                  </div>
                   <p className=" text-[20px] sm:text-[28px] xl:text-[33px] font-normal text-[#292727] mt-6 xl:mt-[35px]">
                     This app presents the most popular technologies worthy of
                     learning and{" "}
@@ -210,6 +224,18 @@ const navigate = useNavigate();
                   <h2 className=" font-semibold text-[30px] sm:text-[35px] xl:text-[45px] ff_promt text-white">
                     ML Summary
                   </h2>
+                  <div>
+                    <Link
+                      className=" font-normal text-[24px] text-white"
+                      to="https://play.google.com/store/apps/details?id=com.salad_apps.ml_summary
+"
+                    >
+                      Available in:{" "}
+                      <span className="text-white relative after:contents-[] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-white">
+                        Google play
+                      </span>
+                    </Link>
+                  </div>
                   <p className=" text-[20px] sm:text-[28px] xl:text-[33px] font-medium text-white mt-6 xl:mt-[35px]">
                     This app will help developers, data scientists, analysts,
                     engineers and other data-people{" "}
@@ -250,6 +276,18 @@ const navigate = useNavigate();
                   <h2 className=" font-semibold text-[30px] sm:text-[35px] xl:text-[45px] ff_promt text-[#B99976]">
                     Space Puzzle
                   </h2>
+                  <div>
+                    <Link
+                      className=" font-normal text-[24px] text-black"
+                      to="https://play.google.com/store/apps/details?id=com.spreddystudio.spacepuzzle
+"
+                    >
+                      Check here:{" "}
+                      <span className="text-[#B99976] relative after:contents-[] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-[#B99976]">
+                        Google play
+                      </span>
+                    </Link>
+                  </div>
                   <p className=" text-[20px] sm:text-[28px] xl:text-[33px] font-normal text-[#292727] mt-6 xl:mt-[35px]">
                     Classical block puzzle in new pack!{" "}
                     <span className=" font-medium text-[#B99976] text-[22px] sm:text-3xl xl:text-[38px]">
